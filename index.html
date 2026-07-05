@@ -26,166 +26,211 @@
   }
   ::selection{ background:var(--red); color:var(--white); }
 
+  /* ── Progress bar ── */
+  #progress{
+    position:fixed; top:0; left:0; height:2px;
+    background:var(--red); width:0%; z-index:1000;
+    transition:width .1s linear;
+  }
+
+  /* ── Nav dots ── */
+  #nav-dots{
+    position:fixed; right:28px; top:50%; transform:translateY(-50%);
+    z-index:100; display:flex; flex-direction:column; gap:12px;
+  }
+  .dot{
+    width:6px; height:6px; border-radius:50%;
+    background:var(--grey-dim); cursor:pointer;
+    transition:all .25s; border:1px solid transparent;
+  }
+  .dot:hover{ background:var(--grey); }
+  .dot.active{ background:var(--red); transform:scale(1.5); }
+
+  /* ── Sections ── */
   section{
-    min-height:100vh;
-    width:100%;
-    display:flex;
-    align-items:center;
+    min-height:100vh; width:100%;
+    display:flex; align-items:center;
     position:relative;
     padding:110px 8vw;
     border-bottom:1px solid var(--line);
+    overflow:hidden;
   }
   section.alt{ background:var(--bg-alt); }
 
-  .wrap{ width:100%; max-width:1180px; margin:0 auto; }
+  .wrap{ width:100%; max-width:1180px; margin:0 auto; position:relative; z-index:1; }
 
+  /* ── Reveal animation ── */
+  .reveal{
+    opacity:0; transform:translateY(32px);
+    transition:opacity .7s ease, transform .7s ease;
+  }
+  .reveal.visible{ opacity:1; transform:translateY(0); }
+  .reveal-d1{ transition-delay:.1s; }
+  .reveal-d2{ transition-delay:.2s; }
+  .reveal-d3{ transition-delay:.3s; }
+  .reveal-d4{ transition-delay:.4s; }
+  .reveal-d5{ transition-delay:.5s; }
+
+  /* ── Background ghost text ── */
+  .bg-ghost{
+    position:absolute; right:-2vw; top:50%; transform:translateY(-50%);
+    font-size:clamp(120px,18vw,260px); font-weight:800; letter-spacing:-.04em;
+    text-transform:uppercase; color:transparent;
+    -webkit-text-stroke:1px var(--line);
+    pointer-events:none; user-select:none; line-height:1;
+    z-index:0;
+  }
+
+  /* ── Eyebrow ── */
   .eyebrow{
-    font-size:12px;
-    font-weight:700;
-    letter-spacing:.16em;
-    text-transform:uppercase;
-    color:var(--red);
-    margin-bottom:22px;
+    font-size:12px; font-weight:700; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--red); margin-bottom:22px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{
+    content:''; display:block; width:24px; height:1px; background:var(--red);
   }
 
   h1,h2,h3{ font-weight:800; letter-spacing:-0.02em; text-transform:uppercase; }
 
   .headline{
     font-size:clamp(34px, 6vw, 84px);
-    line-height:0.98;
-    max-width:16ch;
+    line-height:0.96; max-width:16ch;
   }
 
   .sub{
-    font-size:clamp(14px, 1.6vw, 19px);
-    color:var(--grey);
-    font-weight:400;
-    max-width:56ch;
-    margin-top:22px;
-    line-height:1.55;
-    letter-spacing:0;
-    text-transform:none;
+    font-size:clamp(14px, 1.5vw, 18px); color:var(--grey);
+    font-weight:400; max-width:52ch; margin-top:22px;
+    line-height:1.6; letter-spacing:0; text-transform:none;
   }
 
-  /* Slide number */
+  /* ── Slide footer ── */
   .slide-num{
-    position:absolute;
-    bottom:40px;
-    right:8vw;
-    font-size:11px;
-    letter-spacing:.12em;
-    color:var(--grey-dim);
-    font-weight:700;
-    text-transform:uppercase;
+    position:absolute; bottom:36px; right:8vw;
+    font-size:10px; letter-spacing:.14em; color:var(--grey-dim);
+    font-weight:700; text-transform:uppercase;
   }
   .slide-footer{
-    position:absolute;
-    bottom:40px;
-    left:8vw;
-    font-size:10px;
-    letter-spacing:.1em;
-    color:var(--grey-dim);
-    text-transform:uppercase;
+    position:absolute; bottom:36px; left:8vw;
+    font-size:10px; letter-spacing:.1em; color:var(--grey-dim); text-transform:uppercase;
   }
 
-  /* Tags */
+  /* ── Tags ── */
   .tag-row{ display:flex; flex-wrap:wrap; gap:10px; margin-top:28px; }
   .tag{
-    border:1px solid var(--line);
-    padding:9px 16px;
-    font-size:12.5px;
-    letter-spacing:.02em;
-    color:var(--white);
-    white-space:nowrap;
+    border:1px solid var(--line); padding:9px 16px;
+    font-size:12px; letter-spacing:.04em; color:var(--white);
+    white-space:nowrap; transition:border-color .2s, color .2s;
   }
-  .tag.red{ border-color:var(--red); color:var(--red); }
+  .tag:hover{ border-color:var(--red); color:var(--red); }
   .tag.dim{ color:var(--grey); }
 
-  /* Pillars */
-  .pillars{
-    display:grid;
-    grid-template-columns:1fr 1fr 1fr;
-    gap:1px;
-    background:var(--line);
-    margin-top:50px;
-    border:1px solid var(--line);
+  /* ── Stat callout ── */
+  .stat-row{ display:flex; gap:48px; flex-wrap:wrap; margin-top:44px; }
+  .stat-item .s-num{
+    font-size:clamp(40px,6vw,80px); font-weight:800; letter-spacing:-.04em;
+    line-height:1; color:var(--white);
   }
-  .pillar{ background:var(--bg); padding:40px 26px; }
+  .stat-item .s-num span{ color:var(--red); }
+  .stat-item .s-label{
+    font-size:11px; text-transform:uppercase; letter-spacing:.1em;
+    color:var(--grey); margin-top:6px; font-weight:700;
+  }
+
+  /* ── Pillars ── */
+  .pillars{
+    display:grid; grid-template-columns:1fr 1fr 1fr;
+    gap:1px; background:var(--line); margin-top:50px; border:1px solid var(--line);
+  }
+  .pillar{
+    background:var(--bg); padding:40px 26px;
+    transition:background .25s;
+    border-left:2px solid transparent;
+  }
+  .pillar:hover{ background:#131313; border-left-color:var(--red); }
   section.alt .pillar{ background:var(--bg-alt); }
+  section.alt .pillar:hover{ background:#161616; }
   .pillar .p-num{ font-size:12px; color:var(--red); font-weight:700; letter-spacing:.1em; }
   .pillar h3{ font-size:22px; margin:14px 0 12px; }
   .pillar p{ font-size:13px; color:var(--grey); line-height:1.6; text-transform:none; font-weight:400; letter-spacing:0; }
-  .pillar .ch-label{
-    display:inline-block; margin-top:14px;
-    font-size:10px; letter-spacing:.1em; text-transform:uppercase;
-    color:var(--red); border:1px solid var(--red); padding:4px 9px; font-weight:700;
-  }
 
-  /* Pull quote */
+  /* ── Pull quote ── */
   .quote{
-    font-size:clamp(20px,3.2vw,44px);
-    font-weight:800;
-    text-transform:uppercase;
-    line-height:1.06;
-    max-width:26ch;
-    margin-top:44px;
-    letter-spacing:-0.02em;
-    border-left:3px solid var(--red);
-    padding-left:22px;
+    font-size:clamp(22px,3.5vw,50px); font-weight:800;
+    text-transform:uppercase; line-height:1.05; max-width:24ch;
+    margin-top:48px; letter-spacing:-0.02em;
+    padding-left:24px; border-left:3px solid var(--red);
   }
   .quote span{ color:var(--red); }
 
-  /* Channel rows */
-  .ch-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr 1fr;
-    gap:1px;
-    background:var(--line);
-    border:1px solid var(--line);
-    margin-top:44px;
-  }
-  .ch-col{ background:var(--bg); padding:30px 24px; }
-  section.alt .ch-col{ background:var(--bg-alt); }
-  .ch-col .ch-name{
+  /* ── Budget bar animated ── */
+  .budget-section{ margin-top:48px; }
+  .budget-label{
     font-size:11px; letter-spacing:.14em; text-transform:uppercase;
-    color:var(--grey); font-weight:700; margin-bottom:14px;
+    color:var(--grey); font-weight:700; margin-bottom:16px;
+  }
+  .budget-track{
+    height:3px; background:var(--line); margin-bottom:28px;
+    display:flex; overflow:hidden;
+  }
+  .budget-seg{
+    height:100%; width:0%; transition:width 1.2s cubic-bezier(.4,0,.2,1);
+  }
+  .budget-items{ display:flex; gap:40px; flex-wrap:wrap; align-items:flex-end; }
+  .budget-item .bi-pct{
+    font-size:clamp(36px,5vw,64px); font-weight:800; letter-spacing:-.04em; line-height:1;
+  }
+  .budget-item .bi-label{
+    font-size:10px; color:var(--grey); text-transform:uppercase; letter-spacing:.1em; margin-top:6px;
+  }
+  .pct-red{ color:var(--red); }
+  .pct-white{ color:var(--white); }
+  .pct-dim{ color:var(--grey-dim); }
+
+  /* ── Channel grid ── */
+  .ch-grid{
+    display:grid; grid-template-columns:1fr 1fr 1fr;
+    gap:1px; background:var(--line); border:1px solid var(--line); margin-top:44px;
+  }
+  .ch-col{
+    background:var(--bg); padding:30px 24px;
+    border-left:2px solid transparent;
+    transition:background .25s, border-left-color .25s;
+  }
+  .ch-col:hover{ background:#131313; border-left-color:var(--red); }
+  section.alt .ch-col{ background:var(--bg-alt); }
+  section.alt .ch-col:hover{ background:#161616; }
+  .ch-col .ch-name{
+    font-size:10px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--grey); font-weight:700; margin-bottom:12px;
   }
   .ch-col .ch-role{
-    font-size:13px; font-weight:800; text-transform:uppercase;
-    letter-spacing:-0.01em; margin-bottom:16px; line-height:1.2;
+    font-size:14px; font-weight:800; text-transform:uppercase;
+    letter-spacing:-.01em; margin-bottom:16px; line-height:1.2;
   }
   .ch-col ul{ list-style:none; }
   .ch-col ul li{
-    font-size:12.5px; color:var(--grey);
-    padding:8px 0; border-top:1px solid var(--line); line-height:1.45;
+    font-size:12.5px; color:var(--grey); padding:8px 0;
+    border-top:1px solid var(--line); line-height:1.45;
     text-transform:none; font-weight:400;
   }
   .ch-col ul li:last-child{ border-bottom:1px solid var(--line); }
   .badge{
     display:inline-block; margin-top:14px;
-    font-size:9.5px; letter-spacing:.1em; text-transform:uppercase;
-    padding:4px 9px; font-weight:700;
+    font-size:9px; letter-spacing:.12em; text-transform:uppercase; padding:5px 10px; font-weight:700;
   }
   .badge.primary{ color:var(--white); background:var(--red); }
   .badge.support{ color:var(--grey); border:1px solid var(--grey-dim); }
   .badge.learning{ color:var(--grey); border:1px solid var(--line); }
 
-  /* Budget split bar */
-  .budget-section{ margin-top:44px; }
-  .budget-label{
-    font-size:11px; letter-spacing:.14em; text-transform:uppercase;
-    color:var(--grey); font-weight:700; margin-bottom:18px;
+  /* ── Note flag ── */
+  .note-flag{
+    display:block; font-size:12px; letter-spacing:.02em; text-transform:none;
+    color:var(--grey); border-left:2px solid var(--line);
+    padding:12px 16px; margin-top:32px; font-weight:400; line-height:1.6;
   }
-  .budget-bar{ display:flex; height:6px; background:var(--line); margin-bottom:20px; }
-  .budget-bar .seg{ height:100%; }
-  .budget-items{ display:flex; gap:32px; flex-wrap:wrap; }
-  .budget-item .bi-pct{ font-size:clamp(28px,4vw,48px); font-weight:800; line-height:1; }
-  .budget-item .bi-label{ font-size:11px; color:var(--grey); text-transform:uppercase; letter-spacing:.1em; margin-top:5px; }
-  .pct-red{ color:var(--red); }
-  .pct-white{ color:var(--white); }
-  .pct-dim{ color:var(--grey); }
 
-  /* Line list */
+  /* ── Line list ── */
   .block{ margin-top:38px; }
   .block-label{
     font-size:11px; letter-spacing:.14em; text-transform:uppercase;
@@ -193,91 +238,95 @@
   }
   .line-list{ list-style:none; }
   .line-list li{
-    font-size:13.5px; color:var(--white);
-    padding:11px 0; border-top:1px solid var(--line); line-height:1.5;
+    font-size:13.5px; color:var(--white); padding:11px 0;
+    border-top:1px solid var(--line); line-height:1.5;
     text-transform:none; font-weight:400; letter-spacing:0;
+    transition:color .2s, padding-left .2s;
   }
+  .line-list li:hover{ color:var(--white); padding-left:8px; }
   .line-list li:last-child{ border-bottom:1px solid var(--line); }
-  .line-list li b{ color:var(--grey); font-weight:700; font-size:10px; letter-spacing:.08em; text-transform:uppercase; margin-right:10px; }
 
-  /* Note flag */
-  .note-flag{
-    display:inline-block;
-    font-size:10.5px; letter-spacing:.1em; text-transform:uppercase;
-    color:var(--grey); border:1px solid var(--line);
-    padding:5px 10px; margin-top:28px; font-weight:700;
-    line-height:1.6;
-  }
+  /* ── Cadence ── */
+  .cadence{ display:flex; gap:0; margin-top:40px; border-top:1px solid var(--line); }
+  .cad-item{ flex:1; padding:16px 18px; border-right:1px solid var(--line); transition:background .2s; }
+  .cad-item:hover{ background:var(--bg-alt); }
+  .cad-item:last-child{ border-right:none; }
+  .cad-item .n{ font-size:20px; font-weight:800; color:var(--red); }
+  .cad-item .l{ font-size:10px; color:var(--grey); text-transform:uppercase; letter-spacing:.06em; margin-top:4px; }
 
-  /* KPI groups */
-  .kpi-groups{
-    display:grid; grid-template-columns:1fr 1fr;
-    gap:1px; background:var(--line); border:1px solid var(--line); margin-top:44px;
-  }
-  .kpi-group{ background:var(--bg); padding:26px 24px; }
-  section.alt .kpi-group{ background:var(--bg-alt); }
-  .kpi-group h4{
-    font-size:11px; letter-spacing:.1em; text-transform:uppercase;
-    color:var(--red); margin-bottom:14px; font-weight:700;
-  }
-  .kpi-group ul{ list-style:none; }
-  .kpi-group li{
-    font-size:13px; padding:8px 0; border-top:1px solid var(--line);
-    text-transform:none; font-weight:400; color:var(--white); letter-spacing:0;
-  }
-
-  /* Audience cards */
+  /* ── Audience cards ── */
   .audience-grid{
     display:grid; grid-template-columns:1fr 1fr;
     gap:1px; background:var(--line); border:1px solid var(--line); margin-top:44px;
   }
-  .aud-card{ background:var(--bg); padding:34px 28px; }
+  .aud-card{
+    background:var(--bg); padding:36px 28px;
+    border-left:2px solid transparent;
+    transition:background .25s, border-left-color .25s;
+  }
+  .aud-card:hover{ background:#131313; border-left-color:var(--red); }
   section.alt .aud-card{ background:var(--bg-alt); }
+  section.alt .aud-card:hover{ background:#161616; }
   .aud-card .aud-num{ font-size:11px; color:var(--red); font-weight:700; letter-spacing:.1em; margin-bottom:10px; }
   .aud-card h3{ font-size:20px; margin-bottom:12px; }
   .aud-card p{ font-size:13px; color:var(--grey); line-height:1.6; text-transform:none; font-weight:400; letter-spacing:0; }
   .aud-card .goal{
-    margin-top:18px; display:flex; gap:8px; align-items:center;
-    font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--white); font-weight:700;
+    margin-top:18px; font-size:10px; letter-spacing:.1em;
+    text-transform:uppercase; font-weight:700; color:var(--white);
+    display:flex; gap:6px;
   }
-  .aud-card .goal span{ color:var(--red); }
+  .aud-card .goal em{ color:var(--red); font-style:normal; }
 
-  /* Attribution methods */
+  /* ── Attribution cards ── */
   .attr-grid{
     display:grid; grid-template-columns:1fr 1fr;
     gap:1px; background:var(--line); border:1px solid var(--line); margin-top:44px;
   }
-  .attr-card{ background:var(--bg); padding:28px 24px; }
-  section.alt .attr-card{ background:var(--bg-alt); }
+  .attr-card{
+    background:var(--bg); padding:30px 24px;
+    border-left:2px solid transparent;
+    transition:background .25s, border-left-color .25s;
+  }
+  .attr-card:hover{ background:#131313; border-left-color:var(--red); }
   .attr-card .a-num{ font-size:11px; color:var(--red); font-weight:700; letter-spacing:.1em; margin-bottom:10px; }
-  .attr-card h4{ font-size:16px; text-transform:uppercase; font-weight:800; margin-bottom:10px; }
-  .attr-card p{ font-size:12.5px; color:var(--grey); line-height:1.55; text-transform:none; font-weight:400; letter-spacing:0; }
+  .attr-card h4{ font-size:15px; text-transform:uppercase; font-weight:800; margin-bottom:10px; }
+  .attr-card p{ font-size:12.5px; color:var(--grey); line-height:1.55; text-transform:none; font-weight:400; }
 
-  /* Measurement hierarchy */
-  .meas-ladder{ margin-top:44px; border:1px solid var(--line); }
-  .meas-row{
-    display:flex; gap:0; border-bottom:1px solid var(--line);
+  /* ── Measurement funnel ── */
+  .funnel{ margin-top:44px; }
+  .funnel-row{
+    display:flex; align-items:stretch; margin-bottom:2px;
   }
-  .meas-row:last-child{ border-bottom:none; }
-  .meas-level{
-    width:200px; flex-shrink:0; padding:18px 20px;
+  .funnel-label{
+    width:180px; flex-shrink:0; padding:16px 18px;
     font-size:10px; letter-spacing:.1em; text-transform:uppercase;
-    font-weight:700; border-right:1px solid var(--line);
-    display:flex; align-items:center;
+    font-weight:700; color:var(--grey); display:flex; align-items:center;
+    border:1px solid var(--line); border-right:none;
   }
-  .meas-metrics{
-    padding:18px 20px; font-size:13px; color:var(--grey);
-    text-transform:none; letter-spacing:0; font-weight:400;
-    display:flex; align-items:center;
+  .funnel-bar-wrap{
+    flex:1; display:flex; align-items:center; border:1px solid var(--line); padding:0;
+  }
+  .funnel-bar{
+    height:100%; min-height:52px; display:flex; align-items:center;
+    padding:12px 18px; font-size:13px; color:var(--white);
+    text-transform:none; font-weight:400; width:0%;
+    transition:width 1.4s cubic-bezier(.4,0,.2,1);
+    white-space:nowrap; overflow:hidden;
   }
 
-  /* Advantage cards */
+  /* ── Advantage cards ── */
   .adv-grid{
     display:grid; grid-template-columns:1fr 1fr 1fr;
     gap:1px; background:var(--line); border:1px solid var(--line); margin-top:44px;
   }
-  .adv-card{ background:var(--bg); padding:36px 26px; }
+  .adv-card{
+    background:var(--bg); padding:36px 26px;
+    border-left:2px solid transparent;
+    transition:background .25s, border-left-color .25s;
+  }
+  .adv-card:hover{ background:#131313; border-left-color:var(--red); }
   section.alt .adv-card{ background:var(--bg-alt); }
+  section.alt .adv-card:hover{ background:#161616; }
   .adv-card .adv-num{ font-size:11px; color:var(--red); font-weight:700; letter-spacing:.1em; margin-bottom:14px; }
   .adv-card h3{ font-size:18px; margin-bottom:14px; line-height:1.2; }
   .adv-card p{ font-size:13px; color:var(--grey); line-height:1.6; text-transform:none; font-weight:400; letter-spacing:0; }
@@ -287,83 +336,146 @@
     border-top:1px solid var(--line); padding-top:14px;
   }
 
-  /* Phase table (appendix) */
+  /* ── Phase table ── */
   .phase-table{ margin-top:44px; border:1px solid var(--line); }
   .phase-row{
-    display:grid; grid-template-columns:200px 1fr 1fr 1fr;
-    border-bottom:1px solid var(--line); gap:0;
+    display:grid; grid-template-columns:160px 1fr 200px 1fr;
+    border-bottom:1px solid var(--line);
   }
-  .phase-row.header{ background:var(--bg-alt); }
-  .phase-cell{
-    padding:20px 22px; border-right:1px solid var(--line); font-size:13px;
-  }
+  .phase-row.head{ background:var(--bg-alt); }
+  .phase-row:last-child{ border-bottom:none; }
+  .phase-cell{ padding:20px 22px; border-right:1px solid var(--line); font-size:13px; }
   .phase-cell:last-child{ border-right:none; }
   .phase-cell.label{
     font-size:10px; letter-spacing:.12em; text-transform:uppercase;
     color:var(--grey); font-weight:700; display:flex; align-items:center;
   }
   .phase-cell.phase-name{
-    font-size:14px; font-weight:800; text-transform:uppercase; letter-spacing:-.01em;
+    font-size:14px; font-weight:800; text-transform:uppercase;
     display:flex; align-items:center;
   }
   .phase-cell.desc{
-    font-size:12.5px; color:var(--grey); text-transform:none;
-    line-height:1.5; font-weight:400;
+    font-size:12px; color:var(--grey); text-transform:none; line-height:1.55; font-weight:400;
+    display:flex; align-items:center;
   }
-  .split-stack{ display:flex; flex-direction:column; gap:8px; padding:20px 22px; }
-  .split-row{ display:flex; align-items:center; gap:10px; font-size:12px; }
-  .split-row .s-bar{ height:4px; background:var(--red); flex-shrink:0; }
-  .split-row .s-bar.dim{ background:var(--grey-dim); }
-  .split-row .s-label{ color:var(--grey); font-size:11px; text-transform:uppercase; letter-spacing:.08em; }
-  .split-row .s-pct{ font-size:13px; font-weight:800; min-width:36px; }
+  .split-stack{ display:flex; flex-direction:column; gap:10px; padding:20px 22px; }
+  .split-row{ display:flex; align-items:center; gap:10px; }
+  .split-pct{ font-size:13px; font-weight:800; min-width:38px; }
+  .split-bar{ height:3px; background:var(--red); flex-shrink:0; }
+  .split-bar.dim{ background:var(--grey-dim); }
+  .split-label{ font-size:10px; color:var(--grey); text-transform:uppercase; letter-spacing:.08em; }
 
-  /* Cadence bar */
-  .cadence{ display:flex; gap:0; margin-top:40px; border-top:1px solid var(--line); }
-  .cad-item{ flex:1; padding:16px 18px; border-right:1px solid var(--line); }
-  .cad-item:last-child{ border-right:none; }
-  .cad-item .n{ font-size:20px; font-weight:800; }
-  .cad-item .l{ font-size:10.5px; color:var(--grey); text-transform:uppercase; letter-spacing:.06em; margin-top:4px; }
-
-  /* Channel table for slide 5 */
+  /* ── Channel table ── */
   .ch-table{ margin-top:44px; border:1px solid var(--line); }
   .ch-table-row{
-    display:grid; grid-template-columns:180px 180px 1fr 1fr;
-    border-bottom:1px solid var(--line); gap:0;
+    display:grid; grid-template-columns:160px 220px 1fr 1fr;
+    border-bottom:1px solid var(--line);
+    transition:background .2s;
   }
+  .ch-table-row:hover:not(.head){ background:rgba(227,28,61,.04); }
   .ch-table-row.head{ background:var(--bg-alt); }
   .ch-table-row:last-child{ border-bottom:none; }
-  .ct-cell{ padding:18px 20px; border-right:1px solid var(--line); font-size:13px; }
+  .ct-cell{ padding:20px 20px; border-right:1px solid var(--line); font-size:13px; }
   .ct-cell:last-child{ border-right:none; }
   .ct-cell.head-label{
     font-size:10px; letter-spacing:.12em; text-transform:uppercase;
     color:var(--grey); font-weight:700; display:flex; align-items:center;
   }
-  .ct-cell.channel{ font-size:14px; font-weight:800; text-transform:uppercase; display:flex; align-items:center; }
-  .ct-cell.funnel-role{ font-size:12.5px; color:var(--grey); display:flex; align-items:center; text-transform:none; font-weight:400; }
-  .ct-cell.formats{ font-size:12px; color:var(--grey); text-transform:none; font-weight:400; line-height:1.5; }
-  .ct-cell.strength{ font-size:12px; color:var(--white); text-transform:none; font-weight:400; line-height:1.5; }
+  .ct-cell.channel{ font-size:13px; font-weight:800; text-transform:uppercase; display:flex; align-items:center; }
+  .ct-cell.funnel-role{ font-size:12px; color:var(--grey); display:flex; align-items:center; text-transform:none; font-weight:400; }
+  .ct-cell.formats{ font-size:12px; color:var(--grey); text-transform:none; font-weight:400; line-height:1.6; display:flex; align-items:center; }
+  .ct-cell.strength{ font-size:12px; color:var(--white); text-transform:none; font-weight:400; line-height:1.6; display:flex; align-items:center; }
+
+  /* ── KPI groups ── */
+  .kpi-groups{
+    display:grid; grid-template-columns:1fr 1fr;
+    gap:1px; background:var(--line); border:1px solid var(--line); margin-top:28px;
+  }
+  .kpi-group{ background:var(--bg); padding:26px 24px; }
+  section.alt .kpi-group{ background:var(--bg-alt); }
+  .kpi-group h4{
+    font-size:10px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--red); margin-bottom:14px; font-weight:700;
+  }
+  .kpi-group ul{ list-style:none; }
+  .kpi-group li{ font-size:13px; padding:8px 0; border-top:1px solid var(--line); color:var(--white); }
+
+  /* ── Proprietary box ── */
+  .prop-box{
+    margin-top:44px; border:1px solid var(--red); padding:28px;
+    position:relative; overflow:hidden;
+  }
+  .prop-box::before{
+    content:''; position:absolute; top:0; left:0; width:3px; height:100%; background:var(--red);
+  }
+  .prop-box .pb-label{
+    font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--red); font-weight:700; margin-bottom:12px;
+  }
+  .prop-box p{
+    font-size:15px; color:var(--white); line-height:1.6; text-transform:none; font-weight:400; max-width:56ch;
+  }
+
+  /* ── Hero cover specifics ── */
+  #cover .bg-grid{
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:60px 60px;
+    opacity:.4; pointer-events:none;
+  }
+  #cover .hero-label{
+    display:flex; align-items:center; gap:14px; margin-bottom:32px;
+  }
+  #cover .hero-label span{
+    font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--grey); font-weight:700;
+  }
+  #cover .hero-label .sep{ width:1px; height:16px; background:var(--grey-dim); }
 
   @media(max-width:900px){
     .pillars,.ch-grid,.audience-grid,.attr-grid,.adv-grid{ grid-template-columns:1fr; }
     .kpi-groups{ grid-template-columns:1fr; }
-    .phase-row{ grid-template-columns:1fr; }
+    .phase-row{ grid-template-columns:1fr 1fr; }
     .ch-table-row{ grid-template-columns:1fr 1fr; }
-    .meas-row{ flex-direction:column; }
-    .meas-level{ width:auto; border-right:none; border-bottom:1px solid var(--line); }
+    #nav-dots{ display:none; }
+    .bg-ghost{ display:none; }
+    .stat-row{ gap:28px; }
   }
 </style>
 </head>
 <body>
 
-<!-- ============================================================
+<div id="progress"></div>
+
+<nav id="nav-dots">
+  <div class="dot active" data-target="cover" title="Cover"></div>
+  <div class="dot" data-target="s01" title="Overall Strategy"></div>
+  <div class="dot" data-target="s02" title="Pre-Launch"></div>
+  <div class="dot" data-target="s03" title="Launch"></div>
+  <div class="dot" data-target="s04" title="Post-Launch"></div>
+  <div class="dot" data-target="s05" title="Channel Strategy"></div>
+  <div class="dot" data-target="s06" title="Budget"></div>
+  <div class="dot" data-target="s07" title="Audience"></div>
+  <div class="dot" data-target="s08" title="Attribution"></div>
+  <div class="dot" data-target="s09" title="Paid Advantage"></div>
+</nav>
+
+<!-- ══════════════════════════════════════
      COVER
-============================================================ -->
-<section>
+══════════════════════════════════════ -->
+<section id="cover">
+  <div class="bg-grid"></div>
+  <div class="bg-ghost">PAID</div>
   <div class="wrap">
-    <div class="eyebrow">Paid Media Strategy</div>
-    <h1 class="headline">Time Out Market<br>Abu Dhabi</h1>
-    <p class="sub">A performance-led paid strategy across Meta, TikTok, and Google — built to amplify organic momentum, capture high-intent demand, and convert audiences into reservations, events, and footfall.</p>
-    <div class="tag-row">
+    <div class="hero-label reveal">
+      <span>INHAUS Digital</span>
+      <div class="sep"></div>
+      <span>Time Out Market Abu Dhabi</span>
+    </div>
+    <div class="eyebrow reveal reveal-d1">Paid Media Strategy</div>
+    <h1 class="headline reveal reveal-d2">Time Out<br>Market<br>Abu Dhabi</h1>
+    <p class="sub reveal reveal-d3">A performance-led paid strategy across Meta, TikTok, and Google — built to amplify organic momentum, capture high-intent demand, and convert audiences into reservations, events, and footfall.</p>
+    <div class="tag-row reveal reveal-d4">
       <span class="tag">Meta / Instagram</span>
       <span class="tag">TikTok</span>
       <span class="tag">Google Search / PPC</span>
@@ -374,16 +486,17 @@
   <span class="slide-num">INHAUS × TOM</span>
 </section>
 
-<!-- ============================================================
-     01 / OVERALL PAID STRATEGY
-============================================================ -->
-<section class="alt">
+<!-- ══════════════════════════════════════
+     01 / OVERALL STRATEGY
+══════════════════════════════════════ -->
+<section id="s01" class="alt">
+  <div class="bg-ghost">AMP</div>
   <div class="wrap">
-    <div class="eyebrow">01 / 06 — Overall Paid Strategy</div>
-    <h2 class="headline">Paid as the Amplification &amp; Conversion Layer</h2>
-    <p class="sub">Paid media is not a standalone channel — it is the amplification and conversion layer that scales what works and turns attention into business outcomes.</p>
+    <div class="eyebrow reveal">01 / 09 — Overall Paid Strategy</div>
+    <h2 class="headline reveal reveal-d1">Paid as the Amplification &amp; Conversion Layer</h2>
+    <p class="sub reveal reveal-d2">Paid media is not a standalone channel — it is the amplification and conversion layer that scales what works and turns attention into business outcomes.</p>
 
-    <div class="pillars">
+    <div class="pillars reveal reveal-d3">
       <div class="pillar">
         <div class="p-num">01</div>
         <h3>Amplify</h3>
@@ -401,7 +514,7 @@
       </div>
     </div>
 
-    <div class="ch-grid" style="margin-top:1px;">
+    <div class="ch-grid reveal reveal-d4">
       <div class="ch-col">
         <div class="ch-name">Meta / Instagram</div>
         <div class="ch-role">Full Funnel</div>
@@ -419,29 +532,30 @@
       </div>
     </div>
 
-    <div class="quote">Creative leads;<br><span>paid scales.</span></div>
+    <div class="quote reveal reveal-d5">Creative leads;<br><span>paid scales.</span></div>
 
-    <p class="note-flag">Abu Dhabi is a mobile-first, social-first city where dining decisions are heavily influenced by visual content and real-time social discovery — paid media must match the speed and format of how audiences actually decide.</p>
+    <p class="note-flag reveal">Abu Dhabi is a mobile-first, social-first city where dining decisions are heavily influenced by visual content and real-time social discovery — paid media must match the speed and format of how audiences actually decide.</p>
   </div>
   <span class="slide-footer">Time Out Market Abu Dhabi — Paid Media Strategy</span>
-  <span class="slide-num">01 / 06</span>
+  <span class="slide-num">01 / 09</span>
 </section>
 
-<!-- ============================================================
+<!-- ══════════════════════════════════════
      02 / PRE-LAUNCH
-============================================================ -->
-<section>
+══════════════════════════════════════ -->
+<section id="s02">
+  <div class="bg-ghost">PRE</div>
   <div class="wrap">
-    <div class="eyebrow">02 / 06 — Pre-Launch Phase</div>
-    <h2 class="headline">Build the Audience Before the Doors Open</h2>
-    <p class="sub">Seed awareness, fill retargeting pools, and generate leads — so launch day lands with momentum, not a cold start.</p>
+    <div class="eyebrow reveal">02 / 09 — Pre-Launch Phase</div>
+    <h2 class="headline reveal reveal-d1">Build the Audience Before the Doors Open</h2>
+    <p class="sub reveal reveal-d2">Seed awareness, fill retargeting pools, and generate leads — so launch day lands with momentum, not a cold start.</p>
 
-    <div class="budget-section">
+    <div class="budget-section reveal reveal-d3">
       <div class="budget-label">Phase Budget Logic</div>
-      <div class="budget-bar">
-        <div class="seg" style="width:70%;background:var(--red);"></div>
-        <div class="seg" style="width:20%;background:var(--grey-dim);"></div>
-        <div class="seg" style="width:10%;background:var(--grey);opacity:.4;"></div>
+      <div class="budget-track">
+        <div class="budget-seg" style="background:var(--red);" data-target-width="70%"></div>
+        <div class="budget-seg" style="background:var(--grey-dim);" data-target-width="20%"></div>
+        <div class="budget-seg" style="background:var(--grey);opacity:.35;" data-target-width="10%"></div>
       </div>
       <div class="budget-items">
         <div class="budget-item">
@@ -459,7 +573,7 @@
       </div>
     </div>
 
-    <div class="ch-grid">
+    <div class="ch-grid reveal reveal-d4">
       <div class="ch-col">
         <div class="ch-name">Meta / Instagram</div>
         <div class="ch-role">Awareness &amp; Retargeting Pool</div>
@@ -492,28 +606,29 @@
       </div>
     </div>
 
-    <p class="note-flag">Invest in filling the funnel. Every impression now is a retargetable asset at launch.</p>
+    <p class="note-flag reveal reveal-d5">Invest in filling the funnel. Every impression now is a retargetable asset at launch.</p>
   </div>
   <span class="slide-footer">Time Out Market Abu Dhabi — Paid Media Strategy</span>
-  <span class="slide-num">02 / 06</span>
+  <span class="slide-num">02 / 09</span>
 </section>
 
-<!-- ============================================================
+<!-- ══════════════════════════════════════
      03 / LAUNCH
-============================================================ -->
-<section class="alt">
+══════════════════════════════════════ -->
+<section id="s03" class="alt">
+  <div class="bg-ghost">LIVE</div>
   <div class="wrap">
-    <div class="eyebrow">03 / 06 — Launch Phase</div>
-    <h2 class="headline">Amplify the Opening. Capture the Intent.</h2>
-    <p class="sub">Maximise reach and cultural impact; convert surging search demand into reservations and event bookings.</p>
+    <div class="eyebrow reveal">03 / 09 — Launch Phase</div>
+    <h2 class="headline reveal reveal-d1">Amplify the Opening. Capture the Intent.</h2>
+    <p class="sub reveal reveal-d2">Maximise reach and cultural impact; convert surging search demand into reservations and event bookings.</p>
 
-    <div class="budget-section">
+    <div class="budget-section reveal reveal-d3">
       <div class="budget-label">Budget Split</div>
-      <div class="budget-bar">
-        <div class="seg" style="width:45%;background:var(--red);"></div>
-        <div class="seg" style="width:25%;background:var(--grey-dim);"></div>
-        <div class="seg" style="width:25%;background:var(--grey);opacity:.5;"></div>
-        <div class="seg" style="width:5%;background:var(--white);opacity:.2;"></div>
+      <div class="budget-track">
+        <div class="budget-seg" style="background:var(--red);" data-target-width="45%"></div>
+        <div class="budget-seg" style="background:var(--grey-dim);" data-target-width="25%"></div>
+        <div class="budget-seg" style="background:var(--grey);opacity:.5;" data-target-width="25%"></div>
+        <div class="budget-seg" style="background:var(--white);opacity:.15;" data-target-width="5%"></div>
       </div>
       <div class="budget-items">
         <div class="budget-item">
@@ -529,30 +644,30 @@
           <div class="bi-label">PPC</div>
         </div>
         <div class="budget-item">
-          <div class="bi-pct pct-dim" style="font-size:clamp(20px,2.5vw,32px);">5%</div>
+          <div class="bi-pct pct-dim" style="font-size:clamp(24px,3vw,40px);">5%</div>
           <div class="bi-label">Testing</div>
         </div>
       </div>
     </div>
 
-    <div class="ch-grid">
+    <div class="ch-grid reveal reveal-d4">
       <div class="ch-col">
         <div class="ch-name">Meta / Instagram</div>
         <div class="ch-role">Scale &amp; Convert</div>
         <ul>
-          <li>Reels — chefs, behind-the-scenes, opening-day content</li>
-          <li>Partnership Ads — scaling top influencer assets at launch</li>
-          <li>Retargeting — warm pre-launch audiences toward reservations</li>
-          <li>Lead Gen — groups and private dining campaigns</li>
+          <li>Reels — chefs, behind-the-scenes, opening-day</li>
+          <li>Partnership Ads — scaling top influencer assets</li>
+          <li>Retargeting warm pre-launch audiences</li>
+          <li>Lead Gen — groups and private dining</li>
         </ul>
       </div>
       <div class="ch-col">
         <div class="ch-name">TikTok</div>
         <div class="ch-role">Cultural Moment</div>
         <ul>
-          <li>Spark Ads — highest-performing creator content at scale</li>
+          <li>Spark Ads at scale — highest-performing creators</li>
           <li>Engagement formats capitalising on opening buzz</li>
-          <li>Incremental reach — culturally relevant audiences not on Meta</li>
+          <li>Incremental reach — audiences not on Meta</li>
         </ul>
       </div>
       <div class="ch-col">
@@ -560,35 +675,47 @@
         <div class="ch-role">Intent &amp; Booking</div>
         <ul>
           <li>Full brand campaign — live at launch</li>
-          <li>Generic keywords — best restaurants Abu Dhabi, food hall</li>
-          <li>Reservation &amp; Group / RFP — dedicated conversion campaigns</li>
-          <li>Event-based search — capturing intent around live events</li>
+          <li>Generic keywords — best restaurants Abu Dhabi</li>
+          <li>Reservation &amp; Group / RFP conversion campaigns</li>
+          <li>Event-based search</li>
         </ul>
       </div>
     </div>
 
-    <p class="note-flag">Dining and entertainment decisions in Abu Dhabi are often made within short time windows — dayparting and geo-targeting are structural, not optional. Performance target: 4:1 ROI on reservations, group bookings, and event-driven search.</p>
+    <div class="stat-row reveal reveal-d5">
+      <div class="stat-item">
+        <div class="s-num"><span>4:1</span></div>
+        <div class="s-label">Target ROI — Reservations &amp; Groups</div>
+      </div>
+      <div class="stat-item">
+        <div class="s-num" style="color:var(--grey);">3</div>
+        <div class="s-label">Channels Active Simultaneously</div>
+      </div>
+    </div>
+
+    <p class="note-flag reveal">Dining decisions in Abu Dhabi are often made within short time windows — dayparting and geo-targeting are structural, not optional.</p>
   </div>
   <span class="slide-footer">Time Out Market Abu Dhabi — Paid Media Strategy</span>
-  <span class="slide-num">03 / 06</span>
+  <span class="slide-num">03 / 09</span>
 </section>
 
-<!-- ============================================================
+<!-- ══════════════════════════════════════
      04 / POST-LAUNCH
-============================================================ -->
-<section>
+══════════════════════════════════════ -->
+<section id="s04">
+  <div class="bg-ghost">ROI</div>
   <div class="wrap">
-    <div class="eyebrow">04 / 06 — Post-Launch Phase</div>
-    <h2 class="headline">From Launch Momentum to Sustained Performance</h2>
-    <p class="sub">Shift from momentum to mastery — sustained performance media that converts ongoing demand and defends market position.</p>
+    <div class="eyebrow reveal">04 / 09 — Post-Launch Phase</div>
+    <h2 class="headline reveal reveal-d1">From Launch Momentum to Sustained Performance</h2>
+    <p class="sub reveal reveal-d2">Shift from momentum to mastery — sustained performance media that converts ongoing demand and defends market position.</p>
 
-    <div class="budget-section">
+    <div class="budget-section reveal reveal-d3">
       <div class="budget-label">Budget Phase Split</div>
-      <div class="budget-bar">
-        <div class="seg" style="width:40%;background:var(--grey);opacity:.6;"></div>
-        <div class="seg" style="width:35%;background:var(--red);"></div>
-        <div class="seg" style="width:20%;background:var(--grey-dim);"></div>
-        <div class="seg" style="width:5%;background:var(--white);opacity:.2;"></div>
+      <div class="budget-track">
+        <div class="budget-seg" style="background:var(--grey);opacity:.55;" data-target-width="40%"></div>
+        <div class="budget-seg" style="background:var(--red);" data-target-width="35%"></div>
+        <div class="budget-seg" style="background:var(--grey-dim);" data-target-width="20%"></div>
+        <div class="budget-seg" style="background:var(--white);opacity:.15;" data-target-width="5%"></div>
       </div>
       <div class="budget-items">
         <div class="budget-item">
@@ -604,31 +731,31 @@
           <div class="bi-label">TikTok</div>
         </div>
         <div class="budget-item">
-          <div class="bi-pct pct-dim" style="font-size:clamp(20px,2.5vw,32px);">5%</div>
+          <div class="bi-pct pct-dim" style="font-size:clamp(24px,3vw,40px);">5%</div>
           <div class="bi-label">Testing</div>
         </div>
       </div>
     </div>
 
-    <div class="ch-grid">
+    <div class="ch-grid reveal reveal-d4">
       <div class="ch-col">
         <div class="ch-name">Meta / Instagram</div>
         <div class="ch-role">Retention &amp; Conversion</div>
         <ul>
-          <li>Ongoing retargeting of site visitors and engagement audiences</li>
-          <li>Conversion-optimised campaigns for reservations and events</li>
+          <li>Ongoing retargeting of site visitors</li>
+          <li>Conversion-optimised for reservations &amp; events</li>
           <li>Partnership Ads on evergreen creator content</li>
-          <li>Lookalike audience expansion from proven converters</li>
+          <li>Lookalike expansion from proven converters</li>
         </ul>
       </div>
       <div class="ch-col">
         <div class="ch-name">TikTok</div>
         <div class="ch-role">Sustained Discovery</div>
         <ul>
-          <li>Creator amplification of sustained content output</li>
+          <li>Creator amplification of sustained output</li>
           <li>Retargeting engaged video viewers</li>
-          <li>Discovery campaigns targeting new audience segments</li>
-          <li>Sustain incremental reach alongside Meta efficiency gains</li>
+          <li>Discovery campaigns — new segments</li>
+          <li>Sustain incremental reach alongside Meta</li>
         </ul>
       </div>
       <div class="ch-col">
@@ -636,35 +763,35 @@
         <div class="ch-role">Performance Leader</div>
         <ul>
           <li>Scaled brand &amp; generic search — fully optimised</li>
-          <li>Reservations and Groups / RFP continuously active</li>
-          <li>Event-based search campaigns running continuously</li>
-          <li>Performance Max introduced once conversion signals are established</li>
+          <li>Reservations and Groups / RFP always-on</li>
+          <li>Event-based search continuously active</li>
+          <li>Performance Max once signals established</li>
         </ul>
       </div>
     </div>
 
-    <div class="cadence">
+    <div class="cadence reveal reveal-d5">
       <div class="cad-item"><div class="n">CPR</div><div class="l">Cost per Reservation</div></div>
       <div class="cad-item"><div class="n">ROAS</div><div class="l">Return on Ad Spend</div></div>
       <div class="cad-item"><div class="n">Vol.</div><div class="l">Reservation Volume</div></div>
       <div class="cad-item"><div class="n">RFP</div><div class="l">Group Pipeline</div></div>
     </div>
 
-    <p class="note-flag">Strategic shift: Upper funnel investment reduces — performance media earns its share through measurable return. Budget follows proven ROI.</p>
+    <p class="note-flag reveal">Strategic shift: Upper funnel investment reduces — performance media earns its share through measurable return. Budget follows proven ROI.</p>
   </div>
   <span class="slide-footer">Time Out Market Abu Dhabi — Paid Media Strategy</span>
-  <span class="slide-num">04 / 06</span>
+  <span class="slide-num">04 / 09</span>
 </section>
 
-<!-- ============================================================
+<!-- ══════════════════════════════════════
      05 / CHANNEL STRATEGY
-============================================================ -->
-<section class="alt">
+══════════════════════════════════════ -->
+<section id="s05" class="alt">
   <div class="wrap">
-    <div class="eyebrow">05 / 06 — Channel Strategy</div>
-    <h2 class="headline">Channel Roles — Purpose-Built for Every Funnel Stage</h2>
+    <div class="eyebrow reveal">05 / 09 — Channel Strategy</div>
+    <h2 class="headline reveal reveal-d1">Channel Roles — Purpose-Built for Every Funnel Stage</h2>
 
-    <div class="ch-table">
+    <div class="ch-table reveal reveal-d2">
       <div class="ch-table-row head">
         <div class="ct-cell head-label">Channel</div>
         <div class="ct-cell head-label">Funnel Role</div>
@@ -691,20 +818,20 @@
       </div>
     </div>
 
-    <div style="margin-top:44px;display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);">
-      <div style="background:var(--bg-alt);padding:28px 24px;">
-        <div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--red);font-weight:700;margin-bottom:12px;">Meta Campaigns</div>
-        <ul class="line-list">
-          <li>Awareness teasers</li>
+    <div class="kpi-groups reveal reveal-d3">
+      <div class="kpi-group">
+        <h4>Meta Campaigns</h4>
+        <ul>
+          <li class="kpi-group li">Awareness teasers</li>
           <li>Engagement — chefs / BTS / Reels</li>
           <li>Lead generation</li>
           <li>Traffic</li>
           <li>Retargeting</li>
         </ul>
       </div>
-      <div style="background:var(--bg-alt);padding:28px 24px;">
-        <div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--red);font-weight:700;margin-bottom:12px;">TikTok Campaigns</div>
-        <ul class="line-list">
+      <div class="kpi-group">
+        <h4>TikTok Campaigns</h4>
+        <ul>
           <li>Creator-led Spark Ads</li>
           <li>Video views</li>
           <li>Engagement</li>
@@ -713,150 +840,151 @@
       </div>
     </div>
 
-    <div class="quote">Paid social builds the audience.<br><span>Google captures them</span><br>when they're ready to act.</div>
+    <div class="quote reveal reveal-d4">Paid social builds the audience.<br><span>Google captures them</span><br>when they're ready to act.</div>
   </div>
   <span class="slide-footer">Time Out Market Abu Dhabi — Paid Media Strategy</span>
-  <span class="slide-num">05 / 06</span>
+  <span class="slide-num">05 / 09</span>
 </section>
 
-<!-- ============================================================
-     06 / APPENDIX — BUDGET ALLOCATION
-============================================================ -->
-<section>
+<!-- ══════════════════════════════════════
+     06 / BUDGET APPENDIX
+══════════════════════════════════════ -->
+<section id="s06">
   <div class="wrap">
-    <div class="eyebrow">06 / 06 — Appendix</div>
-    <h2 class="headline">Budget Phase Splits — Follow the Funnel</h2>
+    <div class="eyebrow reveal">06 / 09 — Appendix</div>
+    <h2 class="headline reveal reveal-d1">Budget Phase Splits — Follow the Funnel</h2>
 
-    <div class="phase-table">
+    <div class="phase-table reveal reveal-d2">
       <div class="phase-row head">
         <div class="phase-cell label">Phase</div>
         <div class="phase-cell label">Objective</div>
         <div class="phase-cell label">Split</div>
-        <div class="phase-cell label">Strategic Principle</div>
+        <div class="phase-cell label">Principle</div>
       </div>
       <div class="phase-row">
         <div class="phase-cell phase-name">Pre-Launch</div>
         <div class="phase-cell desc">Fill the funnel, seed awareness, build retargeting pools</div>
         <div class="split-stack">
           <div class="split-row">
-            <div class="s-pct pct-red">70%</div>
-            <div class="s-bar" style="width:70px;"></div>
-            <div class="s-label">Paid Social</div>
+            <div class="split-pct pct-red">70%</div>
+            <div class="split-bar" style="width:70px;"></div>
+            <div class="split-label">Paid Social</div>
           </div>
           <div class="split-row">
-            <div class="s-pct">20%</div>
-            <div class="s-bar dim" style="width:28px;"></div>
-            <div class="s-label">Lead Gen</div>
+            <div class="split-pct">20%</div>
+            <div class="split-bar dim" style="width:28px;"></div>
+            <div class="split-label">Lead Gen</div>
           </div>
           <div class="split-row">
-            <div class="s-pct pct-dim">10%</div>
-            <div class="s-bar dim" style="width:14px;opacity:.5;"></div>
-            <div class="s-label">PPC</div>
+            <div class="split-pct pct-dim">10%</div>
+            <div class="split-bar dim" style="width:14px;opacity:.5;"></div>
+            <div class="split-label">PPC</div>
           </div>
         </div>
-        <div class="phase-cell desc">Invest in audience-building assets that compound at launch</div>
+        <div class="phase-cell desc">Invest in audience assets that compound at launch</div>
       </div>
       <div class="phase-row">
         <div class="phase-cell phase-name">Launch</div>
-        <div class="phase-cell desc">Balanced amplification of the opening moment with simultaneous intent capture</div>
+        <div class="phase-cell desc">Balanced amplification of opening moment with simultaneous intent capture</div>
         <div class="split-stack">
           <div class="split-row">
-            <div class="s-pct pct-red">45%</div>
-            <div class="s-bar" style="width:45px;"></div>
-            <div class="s-label">Meta</div>
+            <div class="split-pct pct-red">45%</div>
+            <div class="split-bar" style="width:45px;"></div>
+            <div class="split-label">Meta</div>
           </div>
           <div class="split-row">
-            <div class="s-pct">25%</div>
-            <div class="s-bar dim" style="width:25px;"></div>
-            <div class="s-label">TikTok</div>
+            <div class="split-pct">25%</div>
+            <div class="split-bar dim" style="width:25px;"></div>
+            <div class="split-label">TikTok</div>
           </div>
           <div class="split-row">
-            <div class="s-pct pct-dim">25%</div>
-            <div class="s-bar dim" style="width:25px;opacity:.5;"></div>
-            <div class="s-label">PPC</div>
+            <div class="split-pct pct-dim">25%</div>
+            <div class="split-bar dim" style="width:25px;opacity:.5;"></div>
+            <div class="split-label">PPC</div>
           </div>
           <div class="split-row">
-            <div class="s-pct pct-dim">5%</div>
-            <div class="s-bar dim" style="width:5px;opacity:.3;"></div>
-            <div class="s-label">Testing</div>
+            <div class="split-pct pct-dim">5%</div>
+            <div class="split-bar dim" style="width:5px;opacity:.3;"></div>
+            <div class="split-label">Testing</div>
           </div>
         </div>
-        <div class="phase-cell desc">Amplify organic momentum at scale while capturing surging search demand</div>
+        <div class="phase-cell desc">Amplify organic momentum while capturing surging search demand</div>
       </div>
       <div class="phase-row" style="border-bottom:none;">
         <div class="phase-cell phase-name">Post-Launch</div>
         <div class="phase-cell desc">Performance-weighted — budget follows proven ROI and measurable conversion signals</div>
         <div class="split-stack">
           <div class="split-row">
-            <div class="s-pct">40%</div>
-            <div class="s-bar dim" style="width:40px;"></div>
-            <div class="s-label">PPC</div>
+            <div class="split-pct">40%</div>
+            <div class="split-bar dim" style="width:40px;"></div>
+            <div class="split-label">PPC</div>
           </div>
           <div class="split-row">
-            <div class="s-pct pct-red">35%</div>
-            <div class="s-bar" style="width:35px;"></div>
-            <div class="s-label">Meta</div>
+            <div class="split-pct pct-red">35%</div>
+            <div class="split-bar" style="width:35px;"></div>
+            <div class="split-label">Meta</div>
           </div>
           <div class="split-row">
-            <div class="s-pct pct-dim">20%</div>
-            <div class="s-bar dim" style="width:20px;opacity:.5;"></div>
-            <div class="s-label">TikTok</div>
+            <div class="split-pct pct-dim">20%</div>
+            <div class="split-bar dim" style="width:20px;opacity:.5;"></div>
+            <div class="split-label">TikTok</div>
           </div>
           <div class="split-row">
-            <div class="s-pct pct-dim">5%</div>
-            <div class="s-bar dim" style="width:5px;opacity:.3;"></div>
-            <div class="s-label">Testing</div>
+            <div class="split-pct pct-dim">5%</div>
+            <div class="split-bar dim" style="width:5px;opacity:.3;"></div>
+            <div class="split-label">Testing</div>
           </div>
         </div>
-        <div class="phase-cell desc">PPC dominates — conversion signals are established, budget follows proof</div>
+        <div class="phase-cell desc">PPC dominates — conversion signals established, budget follows proof</div>
       </div>
     </div>
 
-    <p class="note-flag">The mix is not fixed — it is directional. Optimise continuously based on CPR, ROAS, and booking volume.</p>
+    <p class="note-flag reveal reveal-d3">The mix is not fixed — it is directional. Optimise continuously based on CPR, ROAS, and booking volume.</p>
   </div>
   <span class="slide-footer">Time Out Market Abu Dhabi — Paid Media Strategy</span>
-  <span class="slide-num">06 / 06</span>
+  <span class="slide-num">06 / 09</span>
 </section>
 
-<!-- ============================================================
-     07 / AUDIENCE STRATEGY
-============================================================ -->
-<section class="alt">
+<!-- ══════════════════════════════════════
+     07 / AUDIENCE
+══════════════════════════════════════ -->
+<section id="s07" class="alt">
+  <div class="bg-ghost">WHO</div>
   <div class="wrap">
-    <div class="eyebrow">Audience Strategy — 07 / 09</div>
-    <h2 class="headline">Who We Target — And Why It Matters</h2>
-    <p class="sub">Audience clarity drives creative relevance, bidding efficiency, and conversion quality. One message does not serve all.</p>
+    <div class="eyebrow reveal">07 / 09 — Audience Strategy</div>
+    <h2 class="headline reveal reveal-d1">Who We Target — And Why It Matters</h2>
+    <p class="sub reveal reveal-d2">Audience clarity drives creative relevance, bidding efficiency, and conversion quality. One message does not serve all.</p>
 
-    <div class="audience-grid">
+    <div class="audience-grid reveal reveal-d3">
       <div class="aud-card">
         <div class="aud-num">01</div>
         <h3>In-Market Diners</h3>
         <p>UAE residents actively researching restaurants and dining experiences. Targeted via interest, behaviour, and lookalike signals on Meta and Search.</p>
-        <div class="goal"><span>Goal →</span>&nbsp; Reservations</div>
+        <div class="goal"><em>Goal →</em> Reservations</div>
       </div>
       <div class="aud-card">
         <div class="aud-num">02</div>
         <h3>Experience Seekers</h3>
         <p>Lifestyle-led audiences drawn to cultural moments, chef-led events, and premium social occasions. Engaged through TikTok discovery and Meta Reels.</p>
-        <div class="goal"><span>Goal →</span>&nbsp; Event Bookings &amp; Footfall</div>
+        <div class="goal"><em>Goal →</em> Event Bookings &amp; Footfall</div>
       </div>
       <div class="aud-card">
         <div class="aud-num">03</div>
         <h3>Tourists &amp; Visitors</h3>
         <p>International travellers and in-country visitors. Targeted via geo-signals, travel intent keywords, and tourism-adjacent placements.</p>
-        <div class="goal"><span>Goal →</span>&nbsp; Footfall &amp; Same-Day Visits</div>
+        <div class="goal"><em>Goal →</em> Footfall &amp; Same-Day Visits</div>
       </div>
       <div class="aud-card">
         <div class="aud-num">04</div>
         <h3>Corporate &amp; Groups</h3>
         <p>Decision-makers booking private dining, group events, and corporate entertainment. Reached through LinkedIn-aligned Meta targeting and Search RFP terms.</p>
-        <div class="goal"><span>Goal →</span>&nbsp; High-Value Group Enquiries</div>
+        <div class="goal"><em>Goal →</em> High-Value Group Enquiries</div>
       </div>
     </div>
 
-    <p class="note-flag">Abu Dhabi's audience is dual-layered — a stable local population and a constant flow of high-value international visitors. Always-on campaigns serve locals; tactical bursts capture tourists at peak intent moments.</p>
+    <p class="note-flag reveal reveal-d4">Abu Dhabi's audience is dual-layered — a stable local population and a constant flow of high-value international visitors. Always-on campaigns serve locals; tactical bursts capture tourists at peak intent moments.</p>
 
-    <div class="block">
+    <div class="block reveal reveal-d5">
       <div class="block-label">Audience Layering</div>
       <ul class="line-list">
         <li>Segments are not siloed — they inform retargeting flows, creative versioning, and bid modifiers across all three channels</li>
@@ -868,16 +996,17 @@
   <span class="slide-num">07 / 09</span>
 </section>
 
-<!-- ============================================================
+<!-- ══════════════════════════════════════
      08 / ATTRIBUTION
-============================================================ -->
-<section>
+══════════════════════════════════════ -->
+<section id="s08">
+  <div class="bg-ghost">DATA</div>
   <div class="wrap">
-    <div class="eyebrow">Attribution — 08 / 09</div>
-    <h2 class="headline">From Screen to Market — Closing the Attribution Loop</h2>
-    <p class="sub">Digital impressions are only valuable when we can trace them to physical presence. We build attribution into every campaign from day one.</p>
+    <div class="eyebrow reveal">08 / 09 — Attribution</div>
+    <h2 class="headline reveal reveal-d1">From Screen to Market — Closing the Attribution Loop</h2>
+    <p class="sub reveal reveal-d2">Digital impressions are only valuable when we can trace them to physical presence. We build attribution into every campaign from day one.</p>
 
-    <div class="attr-grid">
+    <div class="attr-grid reveal reveal-d3">
       <div class="attr-card">
         <div class="a-num">01</div>
         <h4>QR Codes</h4>
@@ -900,52 +1029,55 @@
       </div>
     </div>
 
-    <div class="meas-ladder">
-      <div class="meas-row">
-        <div class="meas-level" style="color:var(--grey);">Upper Funnel</div>
-        <div class="meas-metrics">Reach, video completion rate, CPV</div>
+    <div class="funnel reveal reveal-d4" id="funnel">
+      <div class="funnel-row">
+        <div class="funnel-label" style="color:var(--grey-dim);">Upper Funnel</div>
+        <div class="funnel-bar-wrap">
+          <div class="funnel-bar" style="background:rgba(227,28,61,.12);" data-target-width="100%">Reach, video completion rate, CPV</div>
+        </div>
       </div>
-      <div class="meas-row">
-        <div class="meas-level" style="color:var(--grey);">Mid Funnel</div>
-        <div class="meas-metrics">Engagement rate, CTR, cost per click</div>
+      <div class="funnel-row">
+        <div class="funnel-label" style="color:var(--grey);">Mid Funnel</div>
+        <div class="funnel-bar-wrap">
+          <div class="funnel-bar" style="background:rgba(227,28,61,.22);" data-target-width="75%">Engagement rate, CTR, cost per click</div>
+        </div>
       </div>
-      <div class="meas-row">
-        <div class="meas-level" style="color:var(--white);">Lower Funnel</div>
-        <div class="meas-metrics">CPA, cost per reservation, booking volume</div>
+      <div class="funnel-row">
+        <div class="funnel-label" style="color:var(--white);">Lower Funnel</div>
+        <div class="funnel-bar-wrap">
+          <div class="funnel-bar" style="background:rgba(227,28,61,.45);" data-target-width="50%">CPA, cost per reservation, booking volume</div>
+        </div>
       </div>
-      <div class="meas-row" style="border-bottom:none;">
-        <div class="meas-level" style="color:var(--red);">Business Outcome</div>
-        <div class="meas-metrics">Footfall volume, revenue per visit, group RFP pipeline</div>
-      </div>
-    </div>
-
-    <div class="cadence">
-      <div class="cad-item">
-        <div class="n">Weekly</div>
-        <div class="l">Performance signals across paid and content teams</div>
-      </div>
-      <div class="cad-item">
-        <div class="n">Monthly</div>
-        <div class="l">Business outcome review</div>
+      <div class="funnel-row">
+        <div class="funnel-label" style="color:var(--red);">Business Outcome</div>
+        <div class="funnel-bar-wrap">
+          <div class="funnel-bar" style="background:var(--red);" data-target-width="30%">Footfall, revenue per visit, group RFP pipeline</div>
+        </div>
       </div>
     </div>
 
-    <p class="note-flag">In Abu Dhabi, closing the gap between inspiration and visit is not a nice-to-have — it is the entire game.</p>
+    <div class="cadence reveal reveal-d5">
+      <div class="cad-item"><div class="n">Weekly</div><div class="l">Performance signals — paid &amp; content teams</div></div>
+      <div class="cad-item"><div class="n">Monthly</div><div class="l">Business outcome review</div></div>
+    </div>
+
+    <p class="note-flag reveal">In Abu Dhabi, closing the gap between inspiration and visit is not a nice-to-have — it is the entire game.</p>
   </div>
   <span class="slide-footer">Time Out Market Abu Dhabi — Paid Media Strategy</span>
   <span class="slide-num">08 / 09</span>
 </section>
 
-<!-- ============================================================
+<!-- ══════════════════════════════════════
      09 / PAID ADVANTAGE
-============================================================ -->
-<section class="alt">
+══════════════════════════════════════ -->
+<section id="s09" class="alt">
+  <div class="bg-ghost">WIN</div>
   <div class="wrap">
-    <div class="eyebrow">Our Paid Advantage — 09 / 09</div>
-    <h2 class="headline">What Makes Our Paid Approach Different</h2>
-    <p class="sub">Strategy alone does not win pitches — the creative-to-paid feedback loop, faster learning cycles, and integrated operating model are what separate execution from transformation.</p>
+    <div class="eyebrow reveal">09 / 09 — Our Paid Advantage</div>
+    <h2 class="headline reveal reveal-d1">What Makes Our Paid Approach Different</h2>
+    <p class="sub reveal reveal-d2">Strategy alone does not win pitches — the creative-to-paid feedback loop, faster learning cycles, and integrated operating model are what separate execution from transformation.</p>
 
-    <div class="adv-grid">
+    <div class="adv-grid reveal reveal-d3">
       <div class="adv-card">
         <div class="adv-num">01</div>
         <h3>Creative – Paid Feedback Loop</h3>
@@ -966,14 +1098,77 @@
       </div>
     </div>
 
-    <div style="margin-top:44px;border:1px solid var(--red);padding:28px 28px;">
-      <div style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--red);font-weight:700;margin-bottom:12px;">Proprietary Advantage</div>
-      <p style="font-size:15px;color:var(--white);line-height:1.55;text-transform:none;font-weight:400;max-width:56ch;">Top 10% content scaling framework — only the highest-performing creative assets receive amplification budget, ensuring every dirham works harder.</p>
+    <div class="stat-row reveal reveal-d4">
+      <div class="stat-item">
+        <div class="s-num"><span>48</span>–72h</div>
+        <div class="s-label">Creative Feedback Cycle</div>
+      </div>
+      <div class="stat-item">
+        <div class="s-num"><span>Top 10%</span></div>
+        <div class="s-label">Content Scaling Framework</div>
+      </div>
+    </div>
+
+    <div class="prop-box reveal reveal-d5">
+      <div class="pb-label">Proprietary Advantage</div>
+      <p>Top 10% content scaling framework — only the highest-performing creative assets receive amplification budget, ensuring every dirham works harder.</p>
     </div>
   </div>
   <span class="slide-footer">Time Out Market Abu Dhabi — Paid Media Strategy</span>
   <span class="slide-num">09 / 09</span>
 </section>
 
+<script>
+  // ── Progress bar
+  const progress = document.getElementById('progress');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    progress.style.width = (window.scrollY / h * 100) + '%';
+  });
+
+  // ── Nav dots
+  const sections = ['cover','s01','s02','s03','s04','s05','s06','s07','s08','s09'];
+  const dots = document.querySelectorAll('.dot');
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      document.getElementById(dot.dataset.target).scrollIntoView({behavior:'smooth'});
+    });
+  });
+
+  // ── IntersectionObserver for reveals + active dot + animated bars
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        // Reveal elements
+        entry.target.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+
+        // Active dot
+        const id = entry.target.id;
+        const idx = sections.indexOf(id);
+        if(idx > -1){
+          dots.forEach(d => d.classList.remove('active'));
+          dots[idx].classList.add('active');
+        }
+
+        // Animate budget bars
+        entry.target.querySelectorAll('.budget-seg[data-target-width]').forEach(seg => {
+          setTimeout(() => { seg.style.width = seg.dataset.targetWidth; }, 200);
+        });
+
+        // Animate funnel bars
+        entry.target.querySelectorAll('.funnel-bar[data-target-width]').forEach(bar => {
+          setTimeout(() => { bar.style.width = bar.dataset.targetWidth; }, 300);
+        });
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('section').forEach(s => observer.observe(s));
+
+  // Trigger cover on load
+  window.addEventListener('load', () => {
+    document.getElementById('cover').querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+  });
+</script>
 </body>
 </html>
