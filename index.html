@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INHAUS × Time Out Market Abu Dhabi — Paid Media Strategy</title>
+<style>
+  :root{
+    --bg:#0A0A0A;
+    --bg-alt:#111111;
+    --white:#F7F7F5;
+    --grey:#8A8A85;
+    --grey-dim:#54534F;
+    --line:#232322;
+    --red:#E31C3D;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{
+    background:var(--bg);
+    color:var(--white);
+    font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{ background:var(--red); color:var(--white); }
+
+  section{
+    min-height:100vh;
+    width:100%;
+    display:flex;
+    align-items:center;
+    position:relative;
+    padding:110px 8vw;
+    border-bottom:1px solid var(--line);
+  }
+  section.alt{ background:var(--bg-alt); }
+
+  .wrap{ width:100%; max-width:1180px; margin:0 auto; }
+
+  .eyebrow{
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--red);
+    margin-bottom:22px;
+  }
+
+  h1,h2,h3{ font-weight:800; letter-spacing:-0.02em; text-transform:uppercase; }
+
+  .headline{
+    font-size:clamp(34px, 6vw, 84px);
+    line-height:0.98;
+    max-width:16ch;
+  }
+
+  .sub{
+    font-size:clamp(14px, 1.6vw, 19px);
+    color:var(--grey);
+    font-weight:400;
+    max-width:56ch;
+    margin-top:22px;
+    line-height:1.55;
+    letter-spacing:0;
+    text-transform:none;
+  }
+
+  /* Slide number */
+  .slide-num{
+    position:absolute;
+    bottom:40px;
+    right:8vw;
+    font-size:11px;
+    letter-spacing:.12em;
+    color:var(--grey-dim);
+    font-weight:700;
+    text-transform:uppercase;
+  }
+  .slide-footer{
+    position:absolute;
+    bottom:40px;
+    left:8vw;
+    font-size:10px;
+    letter-spacing:.1em;
+    color:var(--grey-dim);
+    text-transform:uppercase;
+  }
+
+  /* Tags */
+  .tag-row{ display:flex; flex-wrap:wrap; gap:10px; margin-top:28px; }
+  .tag{
+    border:1px solid var(--line);
+    padding:9px 16px;
+    font-size:12.5px;
+    letter-spacing:.02em;
+    color:var(--white);
+    white-space:nowrap;
+  }
+  .tag.red{ border-color:var(--red); color:var(--red); }
+  .tag.dim{ color:var(--grey); }
+
+  /* Pillars */
+  .pillars{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:1px;
+    background:var(--line);
+    margin-top:50px;
+    border:1px solid var(--line);
+  }
+  .pillar{ background:var(--bg); padding:40px 26px; }
+  section.alt .pillar{ background:var(--bg-alt); }
+  .pillar .p-num{ font-size:12px; color:var(--red); font-weight:700; letter-spacing:.1em; }
+  .pillar h3{ font-size:22px; margin:14px 0 12px; }
+  .pillar p{ font-size:13px; color:var(--grey); line-height:1.6; text-transform:none; font-weight:400; letter-spacing:0; }
+  .pillar .ch-label{
+    display:inline-block; margin-top:14px;
+    font-size:10px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--red); border:1px solid var(--red); padding:4px 9px; font-weight:700;
+  }
+
+  /* Pull quote */
+  .quote{
+    font-size:clamp(20px,3.2vw,44px);
+    font-weight:800;
+    text-transform:uppercase;
+    line-height:1.06;
+    max-width:26ch;
+    margin-top:44px;
+    letter-spacing:-0.02em;
+    border-left:3px solid var(--red);
+    padding-left:22px;
+  }
+  .quote span{ color:var(--red); }
+
+  /* Channel rows */
+  .ch-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    margin-top:44px;
+  }
+  .ch-col{ background:var(--bg); padding:30px 24px; }
+  section.alt .ch-col{ background:var(--bg-alt); }
+  .ch-col .ch-name{
+    font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--grey); font-weight:700; margin-bottom:14px;
+  }
+  .ch-col .ch-role{
+    font-size:13px; font-weight:800; text-transform:uppercase;
+    letter-spacing:-0.01em; margin-bottom:16px; line-height:1.2;
+  }
+  .ch-col ul{ list-style:none; }
+  .ch-col ul li{
+    font-size:12.5px; color:var(--grey);
+    padding:8px 0; border-top:1px solid var(--line); line-height:1.45;
+    text-transform:none; font-weight:400;
+  }
+  .ch-col ul li:last-child{ border-bottom:1px solid var(--line); }
+  .badge{
+    display:inline-block; margin-top:14px;
+    font-size:9.5px; letter-spacing:.1em; text-transform:uppercase;
+    padding:4px 9px; font-weight:700;
+  }
+  .badge.primary{ color:var(--white); background:var(--red); }
+  .badge.support{ color:var(--grey); border:1px solid var(--grey-dim); }
+  .badge.learning{ color:var(--grey); border:1px solid var(--line); }
+
+  /* Budget split bar */
+  .budget-section{ margin-top:44px; }
+  .budget-label{
+    font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--grey); font-weight:700; margin-bottom:18px;
+  }
+  .budget-bar{ display:flex; height:6px; background:var(--line); margin-bottom:20px; }
+  .budget-bar .seg{ height:100%; }
+  .budget-items{ display:flex; gap:32px; flex-wrap:wrap; }
+  .budget-item .bi-pct{ font-size:clamp(28px,4vw,48px); font-weight:800; line-height:1; }
+  .budget-item .bi-label{ font-size:11px; color:var(--grey); text-transform:uppercase; letter-spacing:.1em; margin-top:5px; }
+  .pct-red{ color:var(--red); }
+  .pct-white{ color:var(--white); }
+  .pct-dim{ color:var(--grey); }
+
+  /* Line list */
+  .block{ margin-top:38px; }
+  .block-label{
+    font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--grey); margin-bottom:12px; font-weight:700;
+  }
+  .line-list{ list-style:none; }
+  .line-list li{
+    font-size:13.5px; color:var(--white);
+    padding:11px 0; border-top:1px solid var(--line); line-height:1.5;
+    text-transform:none; font-weight:400; letter-spacing:0;
+  }
+  .line-list li:last-child{ border-bottom:1px solid var(--line); }
+  .line-list li b{ color:var(--grey); font-weight:700; font-size:10px; letter-spacing:.08em; text-transform:uppercase; margin-right:10px; }
+
+  /* Note flag */
+  .note-flag{
+    display:inline-block;
+    font-size:10.5px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--grey); border:1px solid var(--line);
+    padding:5px 10px; margin-top:28px; font-weight:700;
+    line-height:1.6;
+  }
+
+  /* KPI groups */
+  .kpi-groups{
+    display:grid; grid-template-columns:1fr 1fr;
+    gap:1px; background:var(--line); border:1px solid var(--line); margin-top:44px;
+  }
+  .kpi-group{ background:var(--bg); padding:26px 24px; }
+  section.alt .kpi-group{ background:var(--bg-alt); }
+  .kpi-group h4{
+    font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--red); margin-bottom:14px; font-weight:700;
+  }
+  .kpi-group ul{ list-style:none; }
+  .kpi-group li{
+    font-size:13px; padding:8px 0; border-top:1px solid var(--line);
+    text-transform:none; font-weight:400; color:var(--white); letter-spacing:0;
+  }
+
+  /* Audience cards */
+  .audience-grid{
+    display:grid; grid-template-columns:1fr 1fr;
+    gap:1px; background:var(--line); border:1px solid var(--line); margin-top:44px;
+  }
+  .aud-card{ background:var(--bg); padding:34px 28px; }
+  section.alt .aud-card{ background:var(--bg-alt); }
+  .aud-card .aud-num{ font-size:11px; color:var(--red); font-weight:700; letter-spacing:.1em; margin-bottom:10px; }
+  .aud-card h3{ font-size:20px; margin-bottom:12px; }
+  .aud-card p{ font-size:13px; color:var(--grey); line-height:1.6; text-transform:none; font-weight:400; letter-spacing:0; }
+  .aud-card .goal{
+    margin-top:18px; display:flex; gap:8px; align-items:center;
+    font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--white); font-weight:700;
+  }
+  .aud-card .goal span{ color:var(--red); }
+
+  /* Attribution methods */
+  .attr-grid{
+    display:grid; grid-template-columns:1fr 1fr;
+    gap:1px; background:var(--line); border:1px solid var(--line); margin-top:44px;
+  }
+  .attr-card{ background:var(--bg); padding:28px 24px; }
+  section.alt .attr-card{ background:var(--bg-alt); }
+  .attr-card .a-num{ font-size:11px; color:var(--red); font-weight:700; letter-spacing:.1em; margin-bottom:10px; }
+  .attr-card h4{ font-size:16px; text-transform:uppercase; font-weight:800; margin-bottom:10px; }
+  .attr-card p{ font-size:12.5px; color:var(--grey); line-height:1.55; text-transform:none; font-weight:400; letter-spacing:0; }
+
+  /* Measurement hierarchy */
+  .meas-ladder{ margin-top:44px; border:1px solid var(--line); }
+  .meas-row{
+    display:flex; gap:0; border-bottom:1px solid var(--line);
+  }
+  .meas-row:last-child{ border-bottom:none; }
+  .meas-level{
+    width:200px; flex-shrink:0; padding:18px 20px;
+    font-size:10px; letter-spacing:.1em; text-transform:uppercase;
+    font-weight:700; border-right:1px solid var(--line);
+    display:flex; align-items:center;
+  }
+  .meas-metrics{
+    padding:18px 20px; font-size:13px; color:var(--grey);
+    text-transform:none; letter-spacing:0; font-weight:400;
+    display:flex; align-items:center;
+  }
+
+  /* Advantage cards */
+  .adv-grid{
+    display:grid; grid-template-columns:1fr 1fr 1fr;
+    gap:1px; background:var(--line); border:1px solid var(--line); margin-top:44px;
+  }
+  .adv-card{ background:var(--bg); padding:36px 26px; }
+  section.alt .adv-card{ background:var(--bg-alt); }
+  .adv-card .adv-num{ font-size:11px; color:var(--red); font-weight:700; letter-spacing:.1em; margin-bottom:14px; }
+  .adv-card h3{ font-size:18px; margin-bottom:14px; line-height:1.2; }
+  .adv-card p{ font-size:13px; color:var(--grey); line-height:1.6; text-transform:none; font-weight:400; letter-spacing:0; }
+  .adv-card .adv-note{
+    margin-top:18px; font-size:11px; color:var(--white);
+    text-transform:uppercase; letter-spacing:.06em; font-weight:700;
+    border-top:1px solid var(--line); padding-top:14px;
+  }
+
+  /* Phase table (appendix) */
+  .phase-table{ margin-top:44px; border:1px solid var(--line); }
+  .phase-row{
+    display:grid; grid-template-columns:200px 1fr 1fr 1fr;
+    border-bottom:1px solid var(--line); gap:0;
+  }
+  .phase-row.header{ background:var(--bg-alt); }
+  .phase-cell{
+    padding:20px 22px; border-right:1px solid var(--line); font-size:13px;
+  }
+  .phase-cell:last-child{ border-right:none; }
+  .phase-cell.label{
+    font-size:10px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--grey); font-weight:700; display:flex; align-items:center;
+  }
+  .phase-cell.phase-name{
+    font-size:14px; font-weight:800; text-transform:uppercase; letter-spacing:-.01em;
+    display:flex; align-items:center;
+  }
+  .phase-cell.desc{
+    font-size:12.5px; color:var(--grey); text-transform:none;
+    line-height:1.5; font-weight:400;
+  }
+  .split-stack{ display:flex; flex-direction:column; gap:8px; padding:20px 22px; }
+  .split-row{ display:flex; align-items:center; gap:10px; font-size:12px; }
+  .split-row .s-bar{ height:4px; background:var(--red); flex-shrink:0; }
+  .split-row .s-bar.dim{ background:var(--grey-dim); }
+  .split-row .s-label{ color:var(--grey); font-size:11px; text-transform:uppercase; letter-spacing:.08em; }
+  .split-row .s-pct{ font-size:13px; font-weight:800; min-width:36px; }
+
+  /* Cadence bar */
+  .cadence{ display:flex; gap:0; margin-top:40px; border-top:1px solid var(--line); }
+  .cad-item{ flex:1; padding:16px 18px; border-right:1px solid var(--line); }
+  .cad-item:last-child{ border-right:none; }
+  .cad-item .n{ font-size:20px; font-weight:800; }
+  .cad-item .l{ font-size:10.5px; color:var(--grey); text-transform:uppercase; letter-spacing:.06em; margin-top:4px; }
+
+  /* Channel table for slide 5 */
+  .ch-table{ margin-top:44px; border:1px solid var(--line); }
+  .ch-table-row{
+    display:grid; grid-template-columns:180px 180px 1fr 1fr;
+    border-bottom:1px solid var(--line); gap:0;
+  }
+  .ch-table-row.head{ background:var(--bg-alt); }
+  .ch-table-row:last-child{ border-bottom:none; }
+  .ct-cell{ padding:18px 20px; border-right:1px solid var(--line); font-size:13px; }
+  .ct-cell:last-child{ border-right:none; }
+  .ct-cell.head-label{
+    font-size:10px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--grey); font-weight:700; display:flex; align-items:center;
+  }
+  .ct-cell.channel{ font-size:14px; font-weight:800; text-transform:uppercase; display:flex; align-items:center; }
+  .ct-cell.funnel-role{ font-size:12.5px; color:var(--grey); display:flex; align-items:center; text-transform:none; font-weight:400; }
+  .ct-cell.formats{ font-size:12px; color:var(--grey); text-transform:none; font-weight:400; line-height:1.5; }
+  .ct-cell.strength{ font-size:12px; color:var(--white); text-transform:none; font-weight:400; line-height:1.5; }
+
+  @media(max-width:900px){
+    .pillars,.ch-grid,.audience-grid,.attr-grid,.adv-grid{ grid-template-columns:1fr; }
+    .kpi-groups{ grid-template-columns:1fr; }
+    .phase-row{ grid-template-columns:1fr; }
+    .ch-table-row{ grid-template-columns:1fr 1fr; }
+    .meas-row{ flex-direction:column; }
+    .meas-level{ width:auto; border-right:none; border-bottom:1px solid var(--line); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     COVER
+============================================================ -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Paid Media Strategy</div>
+    <h1 class="headline">Time Out Market<br>Abu Dhabi</h1>
+    <p class="sub">A performance-led paid strategy across Meta, TikTok, and Google — built to amplify organic momentum, capture high-intent demand, and convert audiences into reservations, events, and footfall.</p>
+    <div class="tag-row">
+      <span class="tag">Meta / Instagram</span>
+      <span class="tag">TikTok</span>
+      <span class="tag">Google Search / PPC</span>
+      <span class="tag dim">INHAUS Digital</span>
+    </div>
+  </div>
+  <span class="slide-footer">Time Out Market Abu Dhabi — Paid Media Strategy</span>
+  <span class="slide-num">INHAUS × TOM</span>
+</section>
+
+<!-- ============================================================
+     01 / OVERALL PAID STRATEGY
+============================================================ -->
+<section class="alt">
+  <div class="wrap">
+    <div class="eyebrow">01 / 06 — Overall Paid Strategy</div>
+    <h2 class="headline">Paid as the Amplification &amp; Conversion Layer</h2>
+    <p class="sub">Paid media is not a standalone channel — it is the amplification and conversion layer that scales what works and turns attention into business outcomes.</p>
+
+    <div class="pillars">
+      <div class="pillar">
+        <div class="p-num">01</div>
+        <h3>Amplify</h3>
+        <p>Scale top-performing organic and influencer content across paid channels. Put budget behind what already resonates — not what needs to be manufactured.</p>
+      </div>
+      <div class="pillar">
+        <div class="p-num">02</div>
+        <h3>Activate</h3>
+        <p>Drive key launch moments with coordinated paid bursts across Meta, TikTok, and Search — timed to cultural moments and campaign milestones.</p>
+      </div>
+      <div class="pillar">
+        <div class="p-num">03</div>
+        <h3>Convert</h3>
+        <p>Capture high-intent demand through PPC. Retarget warm audiences toward reservations, events, and footfall — closing the gap between interest and action.</p>
+      </div>
+    </div>
+
+    <div class="ch-grid" style="margin-top:1px;">
+      <div class="ch-col">
+        <div class="ch-name">Meta / Instagram</div>
+        <div class="ch-role">Full Funnel</div>
+        <p style="font-size:12px;color:var(--grey);text-transform:none;font-weight:400;">Awareness → Engagement → Retargeting → Conversion</p>
+      </div>
+      <div class="ch-col">
+        <div class="ch-name">TikTok</div>
+        <div class="ch-role">Discovery</div>
+        <p style="font-size:12px;color:var(--grey);text-transform:none;font-weight:400;">Discovery → Cultural Relevance → Incremental Reach</p>
+      </div>
+      <div class="ch-col">
+        <div class="ch-name">Google Search / PPC</div>
+        <div class="ch-role">Intent Capture</div>
+        <p style="font-size:12px;color:var(--grey);text-transform:none;font-weight:400;">Intent Capture → Reservations → Events → Groups</p>
+      </div>
+    </div>
+
+    <div class="quote">Creative leads;<br><span>paid scales.</span></div>
+
+    <p class="note-flag">Abu Dhabi is a mobile-first, social-first city where dining decisions are heavily influenced by visual content and real-time social discovery — paid media must match the speed and format of how audiences actually decide.</p>
+  </div>
+  <span class="slide-footer">Time Out Market Abu Dhabi — Paid Media Strategy</span>
+  <span class="slide-num">01 / 06</span>
+</section>
+
+<!-- ============================================================
+     02 / PRE-LAUNCH
+============================================================ -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">02 / 06 — Pre-Launch Phase</div>
+    <h2 class="headline">Build the Audience Before the Doors Open</h2>
+    <p class="sub">Seed awareness, fill retargeting pools, and generate leads — so launch day lands with momentum, not a cold start.</p>
+
+    <div class="budget-section">
+      <div class="budget-label">Phase Budget Logic</div>
+      <div class="budget-bar">
+        <div class="seg" style="width:70%;background:var(--red);"></div>
+        <div class="seg" style="width:20%;background:var(--grey-dim);"></div>
+        <div class="seg" style="width:10%;background:var(--grey);opacity:.4;"></div>
+      </div>
+      <div class="budget-items">
+        <div class="budget-item">
+          <div class="bi-pct pct-red">70%</div>
+          <div class="bi-label">Paid Social</div>
+        </div>
+        <div class="budget-item">
+          <div class="bi-pct pct-white">20%</div>
+          <div class="bi-label">Lead Gen</div>
+        </div>
+        <div class="budget-item">
+          <div class="bi-pct pct-dim">10%</div>
+          <div class="bi-label">PPC</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ch-grid">
+      <div class="ch-col">
+        <div class="ch-name">Meta / Instagram</div>
+        <div class="ch-role">Awareness &amp; Retargeting Pool</div>
+        <ul>
+          <li>Teaser campaigns and countdown creatives</li>
+          <li>Partnership Ads amplifying creator content</li>
+          <li>Begin retargeting pool construction</li>
+        </ul>
+        <span class="badge primary">Primary Channel</span>
+      </div>
+      <div class="ch-col">
+        <div class="ch-name">TikTok</div>
+        <div class="ch-role">Discovery &amp; Cultural Seeding</div>
+        <ul>
+          <li>Spark Ads on creator-led content</li>
+          <li>Video views and engagement formats</li>
+          <li>Native, discovery-first — not conversion-led</li>
+        </ul>
+        <span class="badge support">Support Channel</span>
+      </div>
+      <div class="ch-col">
+        <div class="ch-name">Google Search</div>
+        <div class="ch-role">Brand Protection &amp; Learning</div>
+        <ul>
+          <li>Brand keyword protection</li>
+          <li>Early learning phase only</li>
+          <li>No Performance Max at this stage</li>
+        </ul>
+        <span class="badge learning">Learning Phase</span>
+      </div>
+    </div>
+
+    <p class="note-flag">Invest in filling the funnel. Every impression now is a retargetable asset at launch.</p>
+  </div>
+  <span class="slide-footer">Time Out Market Abu Dhabi — Paid Media Strategy</span>
+  <span class="slide-num">02 / 06</span>
+</section>
+
+<!-- ============================================================
+     03 / LAUNCH
+============================================================ -->
+<section class="alt">
+  <div class="wrap">
+    <div class="eyebrow">03 / 06 — Launch Phase</div>
+    <h2 class="headline">Amplify the Opening. Capture the Intent.</h2>
+    <p class="sub">Maximise reach and cultural impact; convert surging search demand into reservations and event bookings.</p>
+
+    <div class="budget-section">
+      <div class="budget-label">Budget Split</div>
+      <div class="budget-bar">
+        <div class="seg" style="width:45%;background:var(--red);"></div>
+        <div class="seg" style="width:25%;background:var(--grey-dim);"></div>
+        <div class="seg" style="width:25%;background:var(--grey);opacity:.5;"></div>
+        <div class="seg" style="width:5%;background:var(--white);opacity:.2;"></div>
+      </div>
+      <div class="budget-items">
+        <div class="budget-item">
+          <div class="bi-pct pct-red">45%</div>
+          <div class="bi-label">Meta</div>
+        </div>
+        <div class="budget-item">
+          <div class="bi-pct pct-white">25%</div>
+          <div class="bi-label">TikTok</div>
+        </div>
+        <div class="budget-item">
+          <div class="bi-pct pct-dim">25%</div>
+          <div class="bi-label">PPC</div>
+        </div>
+        <div class="budget-item">
+          <div class="bi-pct pct-dim" style="font-size:clamp(20px,2.5vw,32px);">5%</div>
+          <div class="bi-label">Testing</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ch-grid">
+      <div class="ch-col">
+        <div class="ch-name">Meta / Instagram</div>
+        <div class="ch-role">Scale &amp; Convert</div>
+        <ul>
+          <li>Reels — chefs, behind-the-scenes, opening-day content</li>
+          <li>Partnership Ads — scaling top influencer assets at launch</li>
+          <li>Retargeting — warm pre-launch audiences toward reservations</li>
+          <li>Lead Gen — groups and private dining campaigns</li>
+        </ul>
+      </div>
+      <div class="ch-col">
+        <div class="ch-name">TikTok</div>
+        <div class="ch-role">Cultural Moment</div>
+        <ul>
+          <li>Spark Ads — highest-performing creator content at scale</li>
+          <li>Engagement formats capitalising on opening buzz</li>
+          <li>Incremental reach — culturally relevant audiences not on Meta</li>
+        </ul>
+      </div>
+      <div class="ch-col">
+        <div class="ch-name">Google Search / PPC</div>
+        <div class="ch-role">Intent &amp; Booking</div>
+        <ul>
+          <li>Full brand campaign — live at launch</li>
+          <li>Generic keywords — best restaurants Abu Dhabi, food hall</li>
+          <li>Reservation &amp; Group / RFP — dedicated conversion campaigns</li>
+          <li>Event-based search — capturing intent around live events</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="note-flag">Dining and entertainment decisions in Abu Dhabi are often made within short time windows — dayparting and geo-targeting are structural, not optional. Performance target: 4:1 ROI on reservations, group bookings, and event-driven search.</p>
+  </div>
+  <span class="slide-footer">Time Out Market Abu Dhabi — Paid Media Strategy</span>
+  <span class="slide-num">03 / 06</span>
+</section>
+
+<!-- ============================================================
+     04 / POST-LAUNCH
+============================================================ -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">04 / 06 — Post-Launch Phase</div>
+    <h2 class="headline">From Launch Momentum to Sustained Performance</h2>
+    <p class="sub">Shift from momentum to mastery — sustained performance media that converts ongoing demand and defends market position.</p>
+
+    <div class="budget-section">
+      <div class="budget-label">Budget Phase Split</div>
+      <div class="budget-bar">
+        <div class="seg" style="width:40%;background:var(--grey);opacity:.6;"></div>
+        <div class="seg" style="width:35%;background:var(--red);"></div>
+        <div class="seg" style="width:20%;background:var(--grey-dim);"></div>
+        <div class="seg" style="width:5%;background:var(--white);opacity:.2;"></div>
+      </div>
+      <div class="budget-items">
+        <div class="budget-item">
+          <div class="bi-pct pct-white">40%</div>
+          <div class="bi-label">PPC (dominant)</div>
+        </div>
+        <div class="budget-item">
+          <div class="bi-pct pct-red">35%</div>
+          <div class="bi-label">Meta</div>
+        </div>
+        <div class="budget-item">
+          <div class="bi-pct pct-dim">20%</div>
+          <div class="bi-label">TikTok</div>
+        </div>
+        <div class="budget-item">
+          <div class="bi-pct pct-dim" style="font-size:clamp(20px,2.5vw,32px);">5%</div>
+          <div class="bi-label">Testing</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ch-grid">
+      <div class="ch-col">
+        <div class="ch-name">Meta / Instagram</div>
+        <div class="ch-role">Retention &amp; Conversion</div>
+        <ul>
+          <li>Ongoing retargeting of site visitors and engagement audiences</li>
+          <li>Conversion-optimised campaigns for reservations and events</li>
+          <li>Partnership Ads on evergreen creator content</li>
+          <li>Lookalike audience expansion from proven converters</li>
+        </ul>
+      </div>
+      <div class="ch-col">
+        <div class="ch-name">TikTok</div>
+        <div class="ch-role">Sustained Discovery</div>
+        <ul>
+          <li>Creator amplification of sustained content output</li>
+          <li>Retargeting engaged video viewers</li>
+          <li>Discovery campaigns targeting new audience segments</li>
+          <li>Sustain incremental reach alongside Meta efficiency gains</li>
+        </ul>
+      </div>
+      <div class="ch-col">
+        <div class="ch-name">Google Search / PPC</div>
+        <div class="ch-role">Performance Leader</div>
+        <ul>
+          <li>Scaled brand &amp; generic search — fully optimised</li>
+          <li>Reservations and Groups / RFP continuously active</li>
+          <li>Event-based search campaigns running continuously</li>
+          <li>Performance Max introduced once conversion signals are established</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="cadence">
+      <div class="cad-item"><div class="n">CPR</div><div class="l">Cost per Reservation</div></div>
+      <div class="cad-item"><div class="n">ROAS</div><div class="l">Return on Ad Spend</div></div>
+      <div class="cad-item"><div class="n">Vol.</div><div class="l">Reservation Volume</div></div>
+      <div class="cad-item"><div class="n">RFP</div><div class="l">Group Pipeline</div></div>
+    </div>
+
+    <p class="note-flag">Strategic shift: Upper funnel investment reduces — performance media earns its share through measurable return. Budget follows proven ROI.</p>
+  </div>
+  <span class="slide-footer">Time Out Market Abu Dhabi — Paid Media Strategy</span>
+  <span class="slide-num">04 / 06</span>
+</section>
+
+<!-- ============================================================
+     05 / CHANNEL STRATEGY
+============================================================ -->
+<section class="alt">
+  <div class="wrap">
+    <div class="eyebrow">05 / 06 — Channel Strategy</div>
+    <h2 class="headline">Channel Roles — Purpose-Built for Every Funnel Stage</h2>
+
+    <div class="ch-table">
+      <div class="ch-table-row head">
+        <div class="ct-cell head-label">Channel</div>
+        <div class="ct-cell head-label">Funnel Role</div>
+        <div class="ct-cell head-label">Formats</div>
+        <div class="ct-cell head-label">Key Strength</div>
+      </div>
+      <div class="ch-table-row">
+        <div class="ct-cell channel">Meta / Instagram</div>
+        <div class="ct-cell funnel-role">Full-Funnel — Awareness through Conversion</div>
+        <div class="ct-cell formats">Reels, Stories, Feed, Partnership Ads, Lead Gen forms</div>
+        <div class="ct-cell strength">Precise targeting, retargeting depth, creator amplification at scale</div>
+      </div>
+      <div class="ch-table-row">
+        <div class="ct-cell channel">TikTok</div>
+        <div class="ct-cell funnel-role">Upper-to-Mid Funnel — Discovery &amp; Cultural Relevance</div>
+        <div class="ct-cell formats">Spark Ads, In-Feed Video, Video Views, Engagement formats</div>
+        <div class="ct-cell strength">Incremental reach, cultural relevance, native content performance</div>
+      </div>
+      <div class="ch-table-row">
+        <div class="ct-cell channel">Google Search / PPC</div>
+        <div class="ct-cell funnel-role">Lower Funnel — Intent Capture &amp; Conversion</div>
+        <div class="ct-cell formats">Search ads, brand campaigns, generic keywords, event / reservation terms</div>
+        <div class="ct-cell strength">High-intent demand capture — target 4:1 ROI on reservations, groups &amp; events</div>
+      </div>
+    </div>
+
+    <div style="margin-top:44px;display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);">
+      <div style="background:var(--bg-alt);padding:28px 24px;">
+        <div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--red);font-weight:700;margin-bottom:12px;">Meta Campaigns</div>
+        <ul class="line-list">
+          <li>Awareness teasers</li>
+          <li>Engagement — chefs / BTS / Reels</li>
+          <li>Lead generation</li>
+          <li>Traffic</li>
+          <li>Retargeting</li>
+        </ul>
+      </div>
+      <div style="background:var(--bg-alt);padding:28px 24px;">
+        <div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--red);font-weight:700;margin-bottom:12px;">TikTok Campaigns</div>
+        <ul class="line-list">
+          <li>Creator-led Spark Ads</li>
+          <li>Video views</li>
+          <li>Engagement</li>
+          <li>Retargeting video viewers</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="quote">Paid social builds the audience.<br><span>Google captures them</span><br>when they're ready to act.</div>
+  </div>
+  <span class="slide-footer">Time Out Market Abu Dhabi — Paid Media Strategy</span>
+  <span class="slide-num">05 / 06</span>
+</section>
+
+<!-- ============================================================
+     06 / APPENDIX — BUDGET ALLOCATION
+============================================================ -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">06 / 06 — Appendix</div>
+    <h2 class="headline">Budget Phase Splits — Follow the Funnel</h2>
+
+    <div class="phase-table">
+      <div class="phase-row head">
+        <div class="phase-cell label">Phase</div>
+        <div class="phase-cell label">Objective</div>
+        <div class="phase-cell label">Split</div>
+        <div class="phase-cell label">Strategic Principle</div>
+      </div>
+      <div class="phase-row">
+        <div class="phase-cell phase-name">Pre-Launch</div>
+        <div class="phase-cell desc">Fill the funnel, seed awareness, build retargeting pools</div>
+        <div class="split-stack">
+          <div class="split-row">
+            <div class="s-pct pct-red">70%</div>
+            <div class="s-bar" style="width:70px;"></div>
+            <div class="s-label">Paid Social</div>
+          </div>
+          <div class="split-row">
+            <div class="s-pct">20%</div>
+            <div class="s-bar dim" style="width:28px;"></div>
+            <div class="s-label">Lead Gen</div>
+          </div>
+          <div class="split-row">
+            <div class="s-pct pct-dim">10%</div>
+            <div class="s-bar dim" style="width:14px;opacity:.5;"></div>
+            <div class="s-label">PPC</div>
+          </div>
+        </div>
+        <div class="phase-cell desc">Invest in audience-building assets that compound at launch</div>
+      </div>
+      <div class="phase-row">
+        <div class="phase-cell phase-name">Launch</div>
+        <div class="phase-cell desc">Balanced amplification of the opening moment with simultaneous intent capture</div>
+        <div class="split-stack">
+          <div class="split-row">
+            <div class="s-pct pct-red">45%</div>
+            <div class="s-bar" style="width:45px;"></div>
+            <div class="s-label">Meta</div>
+          </div>
+          <div class="split-row">
+            <div class="s-pct">25%</div>
+            <div class="s-bar dim" style="width:25px;"></div>
+            <div class="s-label">TikTok</div>
+          </div>
+          <div class="split-row">
+            <div class="s-pct pct-dim">25%</div>
+            <div class="s-bar dim" style="width:25px;opacity:.5;"></div>
+            <div class="s-label">PPC</div>
+          </div>
+          <div class="split-row">
+            <div class="s-pct pct-dim">5%</div>
+            <div class="s-bar dim" style="width:5px;opacity:.3;"></div>
+            <div class="s-label">Testing</div>
+          </div>
+        </div>
+        <div class="phase-cell desc">Amplify organic momentum at scale while capturing surging search demand</div>
+      </div>
+      <div class="phase-row" style="border-bottom:none;">
+        <div class="phase-cell phase-name">Post-Launch</div>
+        <div class="phase-cell desc">Performance-weighted — budget follows proven ROI and measurable conversion signals</div>
+        <div class="split-stack">
+          <div class="split-row">
+            <div class="s-pct">40%</div>
+            <div class="s-bar dim" style="width:40px;"></div>
+            <div class="s-label">PPC</div>
+          </div>
+          <div class="split-row">
+            <div class="s-pct pct-red">35%</div>
+            <div class="s-bar" style="width:35px;"></div>
+            <div class="s-label">Meta</div>
+          </div>
+          <div class="split-row">
+            <div class="s-pct pct-dim">20%</div>
+            <div class="s-bar dim" style="width:20px;opacity:.5;"></div>
+            <div class="s-label">TikTok</div>
+          </div>
+          <div class="split-row">
+            <div class="s-pct pct-dim">5%</div>
+            <div class="s-bar dim" style="width:5px;opacity:.3;"></div>
+            <div class="s-label">Testing</div>
+          </div>
+        </div>
+        <div class="phase-cell desc">PPC dominates — conversion signals are established, budget follows proof</div>
+      </div>
+    </div>
+
+    <p class="note-flag">The mix is not fixed — it is directional. Optimise continuously based on CPR, ROAS, and booking volume.</p>
+  </div>
+  <span class="slide-footer">Time Out Market Abu Dhabi — Paid Media Strategy</span>
+  <span class="slide-num">06 / 06</span>
+</section>
+
+<!-- ============================================================
+     07 / AUDIENCE STRATEGY
+============================================================ -->
+<section class="alt">
+  <div class="wrap">
+    <div class="eyebrow">Audience Strategy — 07 / 09</div>
+    <h2 class="headline">Who We Target — And Why It Matters</h2>
+    <p class="sub">Audience clarity drives creative relevance, bidding efficiency, and conversion quality. One message does not serve all.</p>
+
+    <div class="audience-grid">
+      <div class="aud-card">
+        <div class="aud-num">01</div>
+        <h3>In-Market Diners</h3>
+        <p>UAE residents actively researching restaurants and dining experiences. Targeted via interest, behaviour, and lookalike signals on Meta and Search.</p>
+        <div class="goal"><span>Goal →</span>&nbsp; Reservations</div>
+      </div>
+      <div class="aud-card">
+        <div class="aud-num">02</div>
+        <h3>Experience Seekers</h3>
+        <p>Lifestyle-led audiences drawn to cultural moments, chef-led events, and premium social occasions. Engaged through TikTok discovery and Meta Reels.</p>
+        <div class="goal"><span>Goal →</span>&nbsp; Event Bookings &amp; Footfall</div>
+      </div>
+      <div class="aud-card">
+        <div class="aud-num">03</div>
+        <h3>Tourists &amp; Visitors</h3>
+        <p>International travellers and in-country visitors. Targeted via geo-signals, travel intent keywords, and tourism-adjacent placements.</p>
+        <div class="goal"><span>Goal →</span>&nbsp; Footfall &amp; Same-Day Visits</div>
+      </div>
+      <div class="aud-card">
+        <div class="aud-num">04</div>
+        <h3>Corporate &amp; Groups</h3>
+        <p>Decision-makers booking private dining, group events, and corporate entertainment. Reached through LinkedIn-aligned Meta targeting and Search RFP terms.</p>
+        <div class="goal"><span>Goal →</span>&nbsp; High-Value Group Enquiries</div>
+      </div>
+    </div>
+
+    <p class="note-flag">Abu Dhabi's audience is dual-layered — a stable local population and a constant flow of high-value international visitors. Always-on campaigns serve locals; tactical bursts capture tourists at peak intent moments.</p>
+
+    <div class="block">
+      <div class="block-label">Audience Layering</div>
+      <ul class="line-list">
+        <li>Segments are not siloed — they inform retargeting flows, creative versioning, and bid modifiers across all three channels</li>
+        <li>High creative volume and TikTok trend hijacking are tailored per segment to maximise native relevance</li>
+      </ul>
+    </div>
+  </div>
+  <span class="slide-footer">Time Out Market Abu Dhabi — Paid Media Strategy</span>
+  <span class="slide-num">07 / 09</span>
+</section>
+
+<!-- ============================================================
+     08 / ATTRIBUTION
+============================================================ -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Attribution — 08 / 09</div>
+    <h2 class="headline">From Screen to Market — Closing the Attribution Loop</h2>
+    <p class="sub">Digital impressions are only valuable when we can trace them to physical presence. We build attribution into every campaign from day one.</p>
+
+    <div class="attr-grid">
+      <div class="attr-card">
+        <div class="a-num">01</div>
+        <h4>QR Codes</h4>
+        <p>Campaign-specific QR codes embedded in ads, stories, and influencer content. Scanned on arrival to directly attribute visit to paid source.</p>
+      </div>
+      <div class="attr-card">
+        <div class="a-num">02</div>
+        <h4>Promo Codes &amp; Exclusive Offers</h4>
+        <p>Unique promo codes per campaign and per channel. Redeemed at point of sale to track media-to-visit conversion at SKU level.</p>
+      </div>
+      <div class="attr-card">
+        <div class="a-num">03</div>
+        <h4>Geo-Lift &amp; Store Visit Signals</h4>
+        <p>Meta and Google store visit measurement proxies. Geo-lift studies isolate incremental footfall driven by paid exposure vs organic.</p>
+      </div>
+      <div class="attr-card">
+        <div class="a-num">04</div>
+        <h4>Event RSVPs &amp; Booking Confirmations</h4>
+        <p>Tracked reservation and event RSVP flows as primary conversion events. Direct correlation between paid click and confirmed visit.</p>
+      </div>
+    </div>
+
+    <div class="meas-ladder">
+      <div class="meas-row">
+        <div class="meas-level" style="color:var(--grey);">Upper Funnel</div>
+        <div class="meas-metrics">Reach, video completion rate, CPV</div>
+      </div>
+      <div class="meas-row">
+        <div class="meas-level" style="color:var(--grey);">Mid Funnel</div>
+        <div class="meas-metrics">Engagement rate, CTR, cost per click</div>
+      </div>
+      <div class="meas-row">
+        <div class="meas-level" style="color:var(--white);">Lower Funnel</div>
+        <div class="meas-metrics">CPA, cost per reservation, booking volume</div>
+      </div>
+      <div class="meas-row" style="border-bottom:none;">
+        <div class="meas-level" style="color:var(--red);">Business Outcome</div>
+        <div class="meas-metrics">Footfall volume, revenue per visit, group RFP pipeline</div>
+      </div>
+    </div>
+
+    <div class="cadence">
+      <div class="cad-item">
+        <div class="n">Weekly</div>
+        <div class="l">Performance signals across paid and content teams</div>
+      </div>
+      <div class="cad-item">
+        <div class="n">Monthly</div>
+        <div class="l">Business outcome review</div>
+      </div>
+    </div>
+
+    <p class="note-flag">In Abu Dhabi, closing the gap between inspiration and visit is not a nice-to-have — it is the entire game.</p>
+  </div>
+  <span class="slide-footer">Time Out Market Abu Dhabi — Paid Media Strategy</span>
+  <span class="slide-num">08 / 09</span>
+</section>
+
+<!-- ============================================================
+     09 / PAID ADVANTAGE
+============================================================ -->
+<section class="alt">
+  <div class="wrap">
+    <div class="eyebrow">Our Paid Advantage — 09 / 09</div>
+    <h2 class="headline">What Makes Our Paid Approach Different</h2>
+    <p class="sub">Strategy alone does not win pitches — the creative-to-paid feedback loop, faster learning cycles, and integrated operating model are what separate execution from transformation.</p>
+
+    <div class="adv-grid">
+      <div class="adv-card">
+        <div class="adv-num">01</div>
+        <h3>Creative – Paid Feedback Loop</h3>
+        <p>Top-performing content is identified within 48–72 hours of launch. Performance signals flow directly back into content production — continuously sharpening creative output.</p>
+        <div class="adv-note">The best ads are never guessed — they are surfaced by data and amplified at scale.</div>
+      </div>
+      <div class="adv-card">
+        <div class="adv-num">02</div>
+        <h3>Faster Learning Cycles</h3>
+        <p>Weekly creative rotation and structured A/B testing across Meta, TikTok, and Search. High creative turnover on TikTok enables rapid cultural signal identification before budget commitment.</p>
+        <div class="adv-note">Learning informs scaling. Scaling follows proof.</div>
+      </div>
+      <div class="adv-card">
+        <div class="adv-num">03</div>
+        <h3>Integrated Operating Model</h3>
+        <p>Paid, organic, and influencer teams share a unified performance dashboard. No channel operates in isolation. Budget follows signals; creative follows performance; strategy follows results.</p>
+        <div class="adv-note">No siloed reporting. No wasted impressions. No guesswork.</div>
+      </div>
+    </div>
+
+    <div style="margin-top:44px;border:1px solid var(--red);padding:28px 28px;">
+      <div style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--red);font-weight:700;margin-bottom:12px;">Proprietary Advantage</div>
+      <p style="font-size:15px;color:var(--white);line-height:1.55;text-transform:none;font-weight:400;max-width:56ch;">Top 10% content scaling framework — only the highest-performing creative assets receive amplification budget, ensuring every dirham works harder.</p>
+    </div>
+  </div>
+  <span class="slide-footer">Time Out Market Abu Dhabi — Paid Media Strategy</span>
+  <span class="slide-num">09 / 09</span>
+</section>
+
+</body>
+</html>
