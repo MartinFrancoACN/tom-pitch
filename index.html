@@ -415,6 +415,43 @@
     font-size:15px; color:var(--white); line-height:1.6; text-transform:none; font-weight:400; max-width:56ch;
   }
 
+  /* ── Table of contents ── */
+  .toc{ margin-top:44px; }
+  .toc-label{
+    font-size:10px; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--grey); font-weight:700; margin-bottom:14px;
+  }
+  .toc-grid{
+    display:grid; grid-template-columns:1fr 1fr;
+    border:1px solid var(--line); gap:0;
+  }
+  .toc-item{
+    display:flex; align-items:center; gap:14px;
+    padding:13px 18px; border-bottom:1px solid var(--line);
+    border-right:1px solid var(--line);
+    text-decoration:none; color:var(--white);
+    transition:background .2s, border-left-color .2s;
+    border-left:2px solid transparent;
+  }
+  .toc-item:nth-child(even){ border-right:none; }
+  .toc-item:nth-last-child(-n+2){ border-bottom:none; }
+  .toc-item:hover{ background:rgba(227,28,61,.06); border-left-color:var(--red); }
+  .toc-num{
+    font-size:11px; font-weight:700; color:var(--red);
+    letter-spacing:.1em; min-width:20px; flex-shrink:0;
+  }
+  .toc-title{
+    font-size:12px; text-transform:uppercase; letter-spacing:.04em;
+    font-weight:700; flex:1;
+  }
+  .toc-arrow{
+    font-size:12px; color:var(--grey-dim);
+    transition:color .2s, transform .2s; display:block;
+  }
+  .toc-item:hover .toc-arrow{ color:var(--red); transform:translateX(4px); }
+  .toc-annexe .toc-num{ color:var(--grey-dim); }
+  .toc-annexe .toc-title{ color:var(--grey); }
+
   /* ── Hero cover specifics ── */
   #cover .bg-grid{
     position:absolute; inset:0;
@@ -481,6 +518,22 @@
       <span class="tag">TikTok</span>
       <span class="tag">Google Search / PPC</span>
       <span class="tag dim">INHAUS Digital</span>
+    </div>
+
+    <div class="toc reveal reveal-d5">
+      <div class="toc-label">Contents</div>
+      <div class="toc-grid">
+        <a class="toc-item" href="#s01"><span class="toc-num">01</span><span class="toc-title">Overall Paid Strategy</span><span class="toc-arrow">→</span></a>
+        <a class="toc-item" href="#s02"><span class="toc-num">02</span><span class="toc-title">Pre-Launch Phase</span><span class="toc-arrow">→</span></a>
+        <a class="toc-item" href="#s03"><span class="toc-num">03</span><span class="toc-title">Launch Phase</span><span class="toc-arrow">→</span></a>
+        <a class="toc-item" href="#s04"><span class="toc-num">04</span><span class="toc-title">Post-Launch Phase</span><span class="toc-arrow">→</span></a>
+        <a class="toc-item" href="#s05"><span class="toc-num">05</span><span class="toc-title">Channel Strategy</span><span class="toc-arrow">→</span></a>
+        <a class="toc-item" href="#s06"><span class="toc-num">06</span><span class="toc-title">Budget Phase Splits</span><span class="toc-arrow">→</span></a>
+        <a class="toc-item" href="#s07"><span class="toc-num">07</span><span class="toc-title">Audience Strategy</span><span class="toc-arrow">→</span></a>
+        <a class="toc-item" href="#s08"><span class="toc-num">08</span><span class="toc-title">Attribution</span><span class="toc-arrow">→</span></a>
+        <a class="toc-item" href="#s09"><span class="toc-num">09</span><span class="toc-title">Our Paid Advantage</span><span class="toc-arrow">→</span></a>
+        <a class="toc-item toc-annexe" href="#s10"><span class="toc-num">—</span><span class="toc-title">Annexe — Budget &amp; Benchmarks</span><span class="toc-arrow">→</span></a>
+      </div>
     </div>
   </div>
   <span class="slide-footer">Time Out Market Abu Dhabi — Paid Media Strategy</span>
